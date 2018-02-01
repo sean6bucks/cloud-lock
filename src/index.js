@@ -1,19 +1,15 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import { Provider } from 'react-redux'
 import registerServiceWorker from './registerServiceWorker'
-// APP ITEMS
-import store from './store'
-import CloudLock from './containers/CloudLock'
+import newStore from './store'
+import App from './App.js'
 // STYLES
 import './index.css'
 
-const StoreInstance = store()
+const store = newStore()
 
 ReactDOM.render(
-	<Provider store={ StoreInstance }>
-		<CloudLock />,
-	</Provider>,
+	<App store={ store } />,
 	document.getElementById('root')
-);
+)
 registerServiceWorker()
