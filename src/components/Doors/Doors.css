@@ -1,0 +1,22 @@
+.door-list {
+  width: 100%; }
+
+.door-list .door-item {
+  position: relative;
+  height: 80px;
+  padding: 10px;
+  border-bottom: 1px solid #999; }
+  .door-list .door-item .door-name {
+    line-height: 60px;
+    max-width: calc( 100% - 90px);
+    white-space: nowrap;
+    text-overflow: ellipsis; }
+  .door-list .door-item .door-access {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    height: 60px;
+    width: 60px;
+    background: rgba(0, 0, 0, 0.05);
+    border: 2px solid #0ae059;
+    border-radius: 50%; }
