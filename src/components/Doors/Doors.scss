@@ -20,8 +20,14 @@
 			height: 60px;
 			width: 60px;
 			background: rgba(0,0,0,0.05);
-			border: 2px solid #0ae059;
 			border-radius: 50%;
+			border: 2px solid;
+			&.authorized {
+				border-color: #0ae059;
+			}
+			&.unauthorized {
+				border-color: #de3d3d;
+			}
 		}
 	}
 }

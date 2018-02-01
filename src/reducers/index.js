@@ -1,22 +1,35 @@
 import { combineReducers } from 'redux'
-// TODO: DELETE AND REPLACE WITH API CALL
-import { DATA } from '../constants'
 
 // REDUCER FUNCTIONS
 
-const userReducer = ( prevState={}, { type, id } ) => {
+const userReducer = ( prevState={
+		id: null,
+		name: '',
+		door_access: [],
+		doors: []
+	}, { type, payload } ) => {
 	switch(type) {
 		case 'GET_USER_INFO':
-			return DATA.user
+			return Object.assign({}, prevState, payload);
+		case 'UPDATE_USER_DOORS':
+			const doors = payload.doors.map( door => {
+				return Object.assign({}, door, {
+					authorized: prevState.door_access.includes( door.id )
+				})
+			})
+			return Object.assign({}, prevState, {
+				doors
+			})
 		default:
+		console.log('USER', prevState);
 			return prevState
 	}
 }
 
-const doorListReducer = ( prevState=[], { type }) => {
+const doorListReducer = ( prevState=[], { type, payload }) => {
 	switch(type) {
 		case 'GET_DOOR_LIST':
-			return DATA.doors
+			return payload
 		default:
 			return prevState;
 	}

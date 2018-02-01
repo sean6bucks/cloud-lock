@@ -17,14 +17,13 @@ class CloudLock extends Component {
 
 	componentWillMount() {
 		this.props.action.getUser();
-		this.props.action.getDoorList();
 	}
 
 	render() {
 		return (
 			<div>
 				<Header user={this.props.user} />
-				<Route path="/doors" render={ () => <Doors doors={this.props.doors} /> } />
+				<Route path="/doors" render={ () => <Doors doors={this.props.user.doors} /> } />
 			</div>
 		)
 	}

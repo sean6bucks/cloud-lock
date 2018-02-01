@@ -13,20 +13,13 @@ export class Doors extends Component {
 		doors: PropTypes.array.isRequired
 	}
 
-	getDoors = () => {
-
-	}
-
 	componentWillMount() {
 
 	}
 
 	render() {
-
-		console.log( this.props );
-
 		const available_doors = this.props.doors.map( door => {
-			return <DoorItem key={door.id} uid={door.id} name={door.name}/>
+			return <DoorItem key={door.id} uid={door.id} name={door.name} access={door.authorized}/>
 		})
 
 		return (
