@@ -27,13 +27,6 @@ export const getUser = id => {
 	}
 }
 
-export const updateUserDoors = doors => {
-	return{
-		type: TYPES.UPDATE_USER_DOORS,
-		payload: { doors }
-	}
-}
-
 export const updateUser = ( id, profile ) => {
 
 }
@@ -55,6 +48,20 @@ export const getDoors = () => {
 	}
 }
 
+export const updateUserDoors = ( doors ) => {
+	return {
+		type: TYPES.UPDATE_USER_DOORS,
+		payload: { doors }
+	}
+}
+
+export const changeListFilter = ( filter ) => {
+	return {
+		type: TYPES.CHANGE_LIST_FILTER,
+		payload: { filter }
+	}
+}
+
 export const toggleDoor = show => {
 	return {
 		type: 'TOGGLE_DOOR',
@@ -68,7 +75,6 @@ export const showDoor = door => {
 		payload: door
 	}
 }
-
 export const resetDoor = () => {
 	return {
 		type: 'RESET_DOOR'

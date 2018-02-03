@@ -6,7 +6,7 @@ import { Route } from 'react-router-dom'
 
 import { Header } from '../components/Header'
 import Doors from './Doors'
-import { Footer } from '../components/Footer'
+import Footer from './Footer'
 
 /*
 Main container for Cloud Lock application:

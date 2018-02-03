@@ -53,7 +53,7 @@ class Doors extends Component {
 		// const filtered_doors = this.filterDoors()
 		return (
 			<div>
-				<DoorList doors={ this.props.doors } showDoor={ this.showDoor } />
+				<DoorList doors={ this.props.doors } filter={ this.props.filter } showDoor={ this.showDoor } />
 				<Door open={ this.props.show } id={ this.props.door.id } name={ this.props.door.name } access={ this.props.door.access } hideDoor={ this.hideDoor } />
 			</div>
 		)

@@ -1,32 +1,40 @@
-import React from 'react'
+import React, { Component } from 'react'
 import Paper from 'material-ui/Paper'
 import {
 	BottomNavigation,
 	BottomNavigationItem
 } from 'material-ui/BottomNavigation'
-import FontIcon from 'material-ui/FontIcon'
+import FontAwesomeIcon from '@fortawesome/react-fontawesome'
+import { faKey, faListUl } from '@fortawesome/fontawesome-free-solid'
 
 import './Footer.css'
 
-// TODO HANDLE INDEX CHANGE IN STATE
+class Footer extends Component {
 
-const keyIcon = <FontIcon className="material-icons">vpn_key</FontIcon>;
-const lockIcon = <FontIcon className="material-icons">lock</FontIcon>;
+	select = filter => {
+		this.props.action.changeListFilter( filter )
+	}
 
-export const Footer = ({ user }) => {
+	render() {
 
-	return (
-		<Paper zDepth={1} id="Footer">
-			<BottomNavigation selectedIndex={1}>
-				<BottomNavigationItem
-					icon={ keyIcon }
-					onClick={() => this.select(0)}
-				/>
-				<BottomNavigationItem
-					icon={ lockIcon }
-					onClick={() => this.select(1)}
-				/>
-			</BottomNavigation>
-		</Paper>
-	)
+		const fontIcon = (icon, rotate=0) => <FontAwesomeIcon icon={icon} transform={{ rotate: rotate }} />;
+		const index = this.props.filter === 'ACCESS' ? 0 : 1;
+
+		return (
+			<Paper zDepth={1} id="Footer">
+				<BottomNavigation selectedIndex={ index }>
+					<BottomNavigationItem
+						icon={ fontIcon(faKey) }
+						onClick={() => this.select('ACCESS')}
+					/>
+					<BottomNavigationItem
+						icon={ fontIcon(faListUl, 180) }
+						onClick={() => this.select('ALL')}
+					/>
+				</BottomNavigation>
+			</Paper>
+		)
+	}
 }
+
+export default Footer;

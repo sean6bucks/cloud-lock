@@ -2,14 +2,11 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import * as actions from '../actions'
 
-import Doors from '../components/Doors'
+import Footer from '../components/Footer'
 
 const mapStateToProps = ( state, prop ) => {
 	return {
-		doors: state.user.doors,
-		filter: state.user.filter,
-		show: state.show_door,
-		door: state.door
+		filter: state.user.filter
 	}
 }
 
@@ -19,4 +16,4 @@ const mapDispatchToProps = dispatch => {
 	}
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Doors);
+export default connect(mapStateToProps, mapDispatchToProps)(Footer);

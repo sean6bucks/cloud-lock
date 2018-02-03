@@ -1,4 +1,5 @@
 import { combineReducers } from 'redux'
+import { sort } from '../utilities'
 
 // REDUCER FUNCTIONS
 
@@ -6,7 +7,8 @@ const userReducer = ( prevState={
 		id: null,
 		name: '',
 		door_access: [],
-		doors: []
+		doors: [],
+		filter: 'ACCESS'
 	}, { type, payload } ) => {
 	switch(type) {
 		case 'GET_USER_INFO':
@@ -18,8 +20,10 @@ const userReducer = ( prevState={
 				})
 			})
 			return Object.assign({}, prevState, {
-				doors
+				doors: sort( doors, 'name' )
 			})
+		case 'CHANGE_LIST_FILTER':
+			return Object.assign({}, prevState, payload);
 		default:
 			return prevState
 	}
