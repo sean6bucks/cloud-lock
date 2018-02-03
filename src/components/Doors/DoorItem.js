@@ -1,20 +1,26 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import { ListItem } from 'material-ui/List'
+import Avatar from 'material-ui/Avatar'
+import FontIcon from 'material-ui/FontIcon'
+import { lightGreenA400, red200 } from 'material-ui/styles/colors'
 
-import { Link } from 'react-router-dom'
+export const DoorItem = ({ id, name, access, handleClick }) => {
 
-export const DoorItem = ({ uid, name, access }) => {
+	const authorizedAvatar = <Avatar backgroundColor={ lightGreenA400 } icon={ <FontIcon className="material-icons" color={ '#ffffff' } >vpn_key</FontIcon> } />
+	const unauthorizedAvatar = <Avatar backgroundColor={ red200 } icon={ <FontIcon className="material-icons" color={ '#ffffff' } >lock</FontIcon> } />
+
 	return (
-		<Link to={ `/doors/${uid}` }>
-			<li className="door-item">
-				<h3 className="door-name">
-					{ name }
-				</h3>
-				<span className={ `door-access ${ access ? 'authorized' : 'unauthorized' }` }></span>
-			</li>
-		</Link>
+		<ListItem
+			className={ `door-list__item ${ access ? 'authorized' : 'unauthorized' }` }
+			primaryText={ name }
+			rightAvatar={ access ? authorizedAvatar : unauthorizedAvatar }
+			onClick={ () => { handleClick(id) } }
+		/>
 	)
 }
 DoorItem.propTypes = {
-	name: PropTypes.string.isRequired
+	id: PropTypes.number.isRequired,
+	name: PropTypes.string.isRequired,
+	access: PropTypes.bool.isRequired
 }

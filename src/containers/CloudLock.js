@@ -5,7 +5,8 @@ import * as actions from '../actions'
 import { Route } from 'react-router-dom'
 
 import { Header } from '../components/Header'
-import { Doors } from '../components/Doors'
+import Doors from './Doors'
+import { Footer } from '../components/Footer'
 
 /*
 Main container for Cloud Lock application:
@@ -22,8 +23,9 @@ class CloudLock extends Component {
 	render() {
 		return (
 			<div>
-				<Header user={this.props.user} />
-				<Route path="/doors" render={ () => <Doors doors={this.props.user.doors} /> } />
+				<Header user={ this.props.user } />
+				<Route path="/doors" component={ Doors } />
+				<Footer />
 			</div>
 		)
 	}
@@ -40,6 +42,6 @@ const mapDispatchToProps = dispatch => {
 	return {
 		action: bindActionCreators( actions, dispatch )
 	}
-};
+}
 
 export default connect(mapStateToProps, mapDispatchToProps)(CloudLock);

@@ -21,7 +21,6 @@ const userReducer = ( prevState={
 				doors
 			})
 		default:
-		console.log('USER', prevState);
 			return prevState
 	}
 }
@@ -31,13 +30,34 @@ const doorListReducer = ( prevState=[], { type, payload }) => {
 		case 'GET_DOOR_LIST':
 			return payload
 		default:
-			return prevState;
+			return prevState
+	}
+}
+
+const toggleDoor = ( prevState=false, { type, show }) => {
+	switch(type) {
+		case 'TOGGLE_DOOR':
+			return show
+		default:
+			return prevState
+	}
+}
+const doorReducer = ( prevState={ show: false }, { type, payload }) => {
+	switch(type) {
+		case 'SHOW_DOOR':
+			return Object.assign({}, prevState, { payload })
+		case 'RESET_DOOR':
+			return { show: prevState.show }
+		default:
+			return prevState
 	}
 }
 
 const rootReducer = combineReducers({
 	user: userReducer,
-	doors: doorListReducer
+	doors: doorListReducer,
+	show_door: toggleDoor,
+	door: doorReducer
 });
 
 export default rootReducer;

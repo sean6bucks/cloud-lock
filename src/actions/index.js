@@ -38,15 +38,7 @@ export const updateUser = ( id, profile ) => {
 
 }
 
-export const unlockDoor = id => {
-
-}
-
-export const requestPermission = id => {
-
-}
-
-// ADMIN PANEL DATA
+// DOOR ACTIONS
 
 export const getDoors = () => {
 	const request = axios.get( mockApi + '/doors' )
@@ -63,6 +55,36 @@ export const getDoors = () => {
 	}
 }
 
+export const toggleDoor = show => {
+	return {
+		type: 'TOGGLE_DOOR',
+		show
+	}
+}
+
+export const showDoor = door => {
+	return {
+		type: 'SHOW_DOOR',
+		payload: door
+	}
+}
+
+export const resetDoor = () => {
+	return {
+		type: 'RESET_DOOR'
+	}
+}
+
+export const unlockDoor = id => {
+
+}
+
+export const requestPermission = id => {
+
+}
+
+// ADMIN PANEL DATA
+
 export const addDoor = data => {
 
 }
@@ -70,6 +92,9 @@ export const addDoor = data => {
 export const updateDoor = id => {
 
 }
+
+
+// EMPLYEE ACTIONS
 
 export const getEmployees = () => {
 
