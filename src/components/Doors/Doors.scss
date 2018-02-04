@@ -1,6 +1,6 @@
 @import '../shared';
 
-.door-list {
+#door-list {
 	@extend %full_width;
 	.door-item {
 		position: relative;
@@ -30,4 +30,10 @@
 			}
 		}
 	}
+}
+
+#door-filters {
+	position: fixed;
+	width: 100%;
+	bottom: 0;
 }

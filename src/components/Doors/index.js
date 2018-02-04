@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import CircularProgress from 'material-ui/CircularProgress'
 // COMPONENTS
 import { DoorList } from './DoorList'
-import { Door } from '../Door'
+import { DoorFilters } from './DoorFilters'
 // STYLES
 import './Doors.css'
 
@@ -16,6 +16,10 @@ class Doors extends Component {
 	findDoor = (id) => {
 		if ( typeof id === 'string' ) id = parseInt(id, 10);
 		return this.props.doors.find( door => id === door.id )
+	}
+
+	filterDoors = filter => {
+		this.props.action.changeListFilter( filter )
 	}
 
 	toggleDoor = show => {
@@ -33,12 +37,12 @@ class Doors extends Component {
 		this.props.action.resetDoor();
 	}
 
-	unlockDoor = () => {
-
+	unlockDoor = id => {
+		this.props.action.unlockDoor(id);
 	}
 
-	requestDoorAccess = () => {
-
+	requestDoorAccess = id => {
+		this.props.action.requestAccess(id);
 	}
 
 	componentWillMount() {
@@ -53,8 +57,8 @@ class Doors extends Component {
 		// const filtered_doors = this.filterDoors()
 		return (
 			<div>
-				<DoorList doors={ this.props.doors } filter={ this.props.filter } showDoor={ this.showDoor } />
-				<Door open={ this.props.show } id={ this.props.door.id } name={ this.props.door.name } access={ this.props.door.access } hideDoor={ this.hideDoor } />
+				<DoorList doors={ this.props.doors } filter={ this.props.filter } show={ this.props.show } door={ this.props.door } showDoor={ this.showDoor } hideDoor={ this.hideDoor } unlockDoor={ this.unlockDoor } requestAccess={ this.requestDoorAccess } />
+				<DoorFilters filter={ this.props.filter } handleClick={ this.filterDoors } />
 			</div>
 		)
 	}

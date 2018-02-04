@@ -1,3 +1,58 @@
-.door {
+.door-authorized {
+	position: relative;
+	margin: 50px auto;
+	height: 200px;
+	width: 200px;
+	&.unauthorized {
+		border: 2px solid #EEEEEE;
+	}
+	.unlock-spinner {
+		position: absolute;
+		top: 0;
+		left: 0;
+		display: block;
+		border-radius: 50%;
+		opacity: 0;
+		transition: opacity .5s ease;
+	}
+	&.unlocking,
+	&.unlocked,
+	&.unlock_failed {
+		.unlock-spinner {
+			opacity: 1;
+		}
+	}
+	&.unlocking {
+		.unlock-spinner {
+			animation: unlockSpin .75s linear 0s infinite;
+		}
+	}
+	.unlock-icon__locked {
+		margin: 50px;
+	}
+	.unlock-icon__complete {
+		display: block;
+		padding: 38px;
+		.unlock-icon__complete--path {
+			stroke-dasharray: 1000;
+			stroke-dashoffset: -100;
+			animation: completeCheck .9s ease-in-out forwards;
+		}
+	}
+	.door-authorized__text {
+		padding-top: 15px;
+		font-size: 0.8em;
+		text-align: center;
+		font-weight: 300;
+	}
+}
 
+@keyframes unlockSpin {
+	from { transform: rotate(0deg); }
+	to { transform: rotate(360deg); }
+}
+
+@keyframes completeCheck {
+	from { stroke-dashoffset: -100; }
+ 	to { stroke-dashoffset: 900; }
 }

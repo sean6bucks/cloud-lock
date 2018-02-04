@@ -2,11 +2,10 @@ import React, { Component } from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import * as actions from '../actions'
-import { Route } from 'react-router-dom'
+import { Route, Redirect } from 'react-router-dom'
 
 import { Header } from '../components/Header'
 import Doors from './Doors'
-import Footer from './Footer'
 
 /*
 Main container for Cloud Lock application:
@@ -24,8 +23,9 @@ class CloudLock extends Component {
 		return (
 			<div>
 				<Header user={ this.props.user } />
-				<Route path="/doors" component={ Doors } />
-				<Footer />
+				{/* TODO: REPLACE WITH LOGIN HANDLING */}
+				<Route exact path="/" render={ () => <Redirect to={'/doors'}/> }/>
+				<Route exact path="/doors" component={ Doors } />
 			</div>
 		)
 	}

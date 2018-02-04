@@ -2,6 +2,10 @@
 h1, h2, h3, h4, h5, h6, p, span {
   font-family: 'Roboto', Helvetica, Arial, sans-serif; }
 
+h2 {
+  font-size: 1.8em;
+  font-weight: 300; }
+
 h3 {
   font-size: 1.3em; }
 
@@ -13,3 +17,10 @@ ul {
 a {
   text-decoration: none;
   color: inherit; }
+
+.text-center {
+  text-align: center; }
+
+.button-text {
+  line-height: 36px;
+  text-align: center; }

@@ -64,14 +64,14 @@ export const changeListFilter = ( filter ) => {
 
 export const toggleDoor = show => {
 	return {
-		type: 'TOGGLE_DOOR',
+		type: TYPES.TOGGLE_DOOR,
 		show
 	}
 }
 
 export const showDoor = door => {
 	return {
-		type: 'SHOW_DOOR',
+		type: TYPES.SHOW_DOOR,
 		payload: door
 	}
 }
@@ -81,12 +81,49 @@ export const resetDoor = () => {
 	}
 }
 
+const changeDoorStatus = status => {
+	return {
+		type: TYPES.CHANGE_DOOR_STATUS,
+		payload: { status }
+	}
+}
 export const unlockDoor = id => {
-
+    // TODO: BUILD GLOBAL API DELAY
+    // SIMULATE API CALL TIME
+	return (dispatch, getState) => {
+		dispatch( changeDoorStatus('unlocking') );
+		setTimeout(()=>{
+			dispatch({
+				type: 'UNLOCK_DOOR',
+				payload: { id }
+			});
+			if ( getState().door.status === 'unlocked' ) {
+				setTimeout( ()=> {
+					dispatch( toggleDoor(false) );
+					dispatch( resetDoor() );
+				}, 500 )
+			}
+		}, 2000 );
+	}
 }
 
-export const requestPermission = id => {
-
+export const requestAccess = door => {
+	// TODO: BUILD GLOBAL API DELAY
+	return (dispatch, getState) => {
+		dispatch( changeDoorStatus('requesting') );
+		setTimeout(()=>{
+			dispatch({
+				type: 'REQUEST_ACCESS',
+				payload: door
+			});
+			if ( getState().door.status === 'requested' ) {
+				setTimeout( ()=> {
+					dispatch( toggleDoor(false) );
+					dispatch( resetDoor() );
+				}, 1000 )
+			}
+		}, 2000 );
+	}
 }
 
 // ADMIN PANEL DATA

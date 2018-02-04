@@ -1,17 +1,17 @@
-.door-list {
+#door-list {
   width: 100%; }
 
-.door-list .door-item {
+#door-list .door-item {
   position: relative;
   height: 80px;
   padding: 10px;
   border-bottom: 1px solid #999; }
-  .door-list .door-item .door-name {
+  #door-list .door-item .door-name {
     line-height: 60px;
     max-width: calc( 100% - 90px);
     white-space: nowrap;
     text-overflow: ellipsis; }
-  .door-list .door-item .door-access {
+  #door-list .door-item .door-access {
     position: absolute;
     top: 10px;
     right: 10px;
@@ -20,7 +20,12 @@
     background: rgba(0, 0, 0, 0.05);
     border-radius: 50%;
     border: 2px solid; }
-    .door-list .door-item .door-access.authorized {
+    #door-list .door-item .door-access.authorized {
       border-color: #0ae059; }
-    .door-list .door-item .door-access.unauthorized {
+    #door-list .door-item .door-access.unauthorized {
       border-color: #de3d3d; }
+
+#door-filters {
+  position: fixed;
+  width: 100%;
+  bottom: 0; }

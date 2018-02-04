@@ -8,7 +8,7 @@ const userReducer = ( prevState={
 		name: '',
 		door_access: [],
 		doors: [],
-		filter: 'ACCESS'
+		filter: 'AUTHORIZED'
 	}, { type, payload } ) => {
 	switch(type) {
 		case 'GET_USER_INFO':
@@ -46,12 +46,18 @@ const toggleDoor = ( prevState=false, { type, show }) => {
 			return prevState
 	}
 }
-const doorReducer = ( prevState={ show: false }, { type, payload }) => {
+const doorReducer = ( prevState={}, { type, payload }) => {
 	switch(type) {
 		case 'SHOW_DOOR':
-			return Object.assign({}, prevState, { payload })
+			return Object.assign({}, prevState, payload )
 		case 'RESET_DOOR':
-			return { show: prevState.show }
+			return {}
+		case 'CHANGE_DOOR_STATUS':
+			return Object.assign({}, prevState, payload )
+		case 'UNLOCK_DOOR':
+			return Object.assign({}, prevState, { status: 'unlocked' } )
+		case 'REQUEST_ACCESS':
+			return Object.assign({}, prevState, { status: 'requested' } )
 		default:
 			return prevState
 	}
