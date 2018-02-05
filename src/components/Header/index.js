@@ -1,25 +1,34 @@
-import React from 'react'
+import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import Avatar from 'material-ui/Avatar'
-import Paper from 'material-ui/Paper'
-
+import AppBar from 'material-ui/AppBar'
+import { lightBlueA200 } from 'material-ui/styles/colors'
+// COMPONENT
+import { Logout } from './Logout'
+// STYLES
 import './Header.css'
 
-export const Header = ({ user }) => {
-	const style = {
-		height: 60,
-		width: 60,
-		position: 'fixed',
-		top: 10,
-		right: 10,
-		zIndex: 10
-	};
-	return (
-		<Paper style={ style } circle={true} zDepth={3}>
-			<Avatar src={ user.avatar } size={60} />
-		</Paper>
-	)
+class Header extends Component {
+
+	static propTypes = {
+		user: PropTypes.object.isRequired
+	}
+
+	render() {
+		const style = {
+			position: 'fixed',
+			top: 0,
+			zIndex: 10,
+			backgroundColor: lightBlueA200
+		};
+
+		return (
+			<AppBar
+				style={ style }
+				iconElementRight={ <Logout handleClick={ this.props.action.logout }/> }
+				onLeftIconButtonClick={ this.props.action.toggleMenu }
+			/>
+		)
+	}
 }
-Header.propTypes = {
-	user: PropTypes.object.isRequired
-};
+
+export default Header;

@@ -1,17 +1,45 @@
 import axios from 'axios'
 import { TYPES } from '../constants'
-import { mockApi } from '../config/endpoints'
+import { endpoint } from '../config/endpoint'
+import { delay } from '../utilities/helpers'
+import { mockApi } from '../utilities/mockApi'
 
 // GLOBAL ACTIONS
 
 export const login = data => {
+    // TODO: REPLACE WITH REAL BACKEND > FOR NOW USE mockApi
+	return (dispatch, getState) => {
+		mockApi.post('/login', data).then(
+			({ token }) => {
+				dispatch( setAuthToken(token) );
+			}
+		)
+	}
+}
 
+export const logout = () => {
+	return (dispatch, getState) => {
+		dispatch( setAuthToken(null) );
+	}
+}
+
+export const setAuthToken = token => {
+	return {
+		type: TYPES.SET_AUTH_TOKEN,
+		token
+	}
+}
+
+export const toggleMenu = () => {
+	return {
+		type: TYPES.TOGGLE_MENU
+	}
 }
 
 // USER DATA
 
 export const getUser = id => {
-	const request = axios.get( mockApi + '/user' )
+	const request = axios.get( endpoint + '/user' )
 
 	return (dispatch, getState) => {
 		request.then(
@@ -34,7 +62,7 @@ export const updateUser = ( id, profile ) => {
 // DOOR ACTIONS
 
 export const getDoors = () => {
-	const request = axios.get( mockApi + '/doors' )
+	const request = axios.get( endpoint + '/doors' )
 	return (dispatch, getState) => {
 		request.then(
 			({data}) => {
@@ -77,7 +105,7 @@ export const showDoor = door => {
 }
 export const resetDoor = () => {
 	return {
-		type: 'RESET_DOOR'
+		type: TYPES.RESET_DOOR
 	}
 }
 
@@ -88,41 +116,63 @@ const changeDoorStatus = status => {
 	}
 }
 export const unlockDoor = id => {
-    // TODO: BUILD GLOBAL API DELAY
-    // SIMULATE API CALL TIME
+    const request = axios.post( endpoint + '/unlock', { id })
 	return (dispatch, getState) => {
 		dispatch( changeDoorStatus('unlocking') );
-		setTimeout(()=>{
-			dispatch({
-				type: 'UNLOCK_DOOR',
-				payload: { id }
-			});
-			if ( getState().door.status === 'unlocked' ) {
-				setTimeout( ()=> {
+		request.then(
+			({data}) => {
+                // TODO: ADD DELAY SETTING FOR DEMO?
+				// delay( () => {
+				// 	...
+				// }, 2000 )
+
+				dispatch({
+					type: TYPES.UNLOCK_DOOR,
+					payload: { id }
+				});
+				delay( () => {
+					dispatch( toggleDoor(false) );
+					dispatch( resetDoor() );
+				}, 500)
+			}
+		).catch(
+			({error}) => {
+				console.log(`
+					== ERROR: Unlock Door ==
+					${ error }
+					========================
+				`)
+				dispatch( changeDoorStatus('unlock_failed') );
+			}
+		)
+	}
+}
+
+export const requestAccess = id => {
+	const request = axios.post( endpoint + '/unlock', { id })
+	return (dispatch, getState) => {
+		dispatch( changeDoorStatus('requesting') );
+		request.then(
+			({data}) => {
+				dispatch({
+					type: TYPES.REQUEST_ACCESS,
+					payload: id
+				});
+				delay( ()=> {
 					dispatch( toggleDoor(false) );
 					dispatch( resetDoor() );
 				}, 500 )
 			}
-		}, 2000 );
-	}
-}
-
-export const requestAccess = door => {
-	// TODO: BUILD GLOBAL API DELAY
-	return (dispatch, getState) => {
-		dispatch( changeDoorStatus('requesting') );
-		setTimeout(()=>{
-			dispatch({
-				type: 'REQUEST_ACCESS',
-				payload: door
-			});
-			if ( getState().door.status === 'requested' ) {
-				setTimeout( ()=> {
-					dispatch( toggleDoor(false) );
-					dispatch( resetDoor() );
-				}, 1000 )
+		).catch(
+			({error}) => {
+				console.log(`
+					== ERROR: Request Access ==
+					${ error }
+					===========================
+				`)
+				dispatch( changeDoorStatus('request_failed') );
 			}
-		}, 2000 );
+		)
 	}
 }
 

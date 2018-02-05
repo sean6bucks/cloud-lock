@@ -9,3 +9,7 @@ export const sort = (arr, val) => {
 		return valA < valB ? -1 : valA > valB ? 1 : 0;
 	})
 }
+
+export const delay = (func, duration) => {
+	setTimeout( func, duration );
+}

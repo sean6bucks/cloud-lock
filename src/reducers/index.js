@@ -1,7 +1,29 @@
 import { combineReducers } from 'redux'
-import { sort } from '../utilities'
+import { sort } from '../utilities/helpers'
 
 // REDUCER FUNCTIONS
+const tokenReducer = ( prevState=null, { type, token }) => {
+	switch(type) {
+		case 'SET_AUTH_TOKEN':
+			if ( token ) {
+				localStorage.setItem('cLock_token', token);
+			} else {
+				localStorage.removeItem('cLock_token');
+			}
+			return token;
+		default:
+			return prevState
+	}
+}
+
+const menuReducer = ( prevState=false, { type }) => {
+	switch(type) {
+		case 'TOGGLE_MENU':
+			return !prevState;
+		default:
+			return prevState
+	}
+}
 
 const userReducer = ( prevState={
 		id: null,
@@ -64,6 +86,8 @@ const doorReducer = ( prevState={}, { type, payload }) => {
 }
 
 const rootReducer = combineReducers({
+	token: tokenReducer,
+	open_menu: menuReducer,
 	user: userReducer,
 	doors: doorListReducer,
 	show_door: toggleDoor,

@@ -24,3 +24,6 @@ a {
 .button-text {
   line-height: 36px;
   text-align: center; }
+
+#App {
+  padding-top: 64px; }

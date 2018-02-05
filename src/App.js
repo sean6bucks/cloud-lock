@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { Provider } from 'react-redux'
-import { BrowserRouter, Switch, Route } from 'react-router-dom'
+import { BrowserRouter, Route, Switch } from 'react-router-dom'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 // APP ITEMS
 import CloudLock from './containers/CloudLock'
@@ -12,11 +12,11 @@ const App = ({ store }) => {
 	return (
 		<Provider store={ store }>
 			<BrowserRouter>
-				<Switch>
-					<MuiThemeProvider>
+				<MuiThemeProvider>
+					<Switch>
 						<Route path="/" component={ CloudLock } />
-					</MuiThemeProvider>
-				</Switch>
+					</Switch>
+				</MuiThemeProvider>
 			</BrowserRouter>
 		</Provider>
 	)

@@ -1,0 +1,20 @@
+.menu-section {
+	h2 {
+		padding: 10px 10px 5px 10px;
+	}
+	.nav-item {
+		position: relative;
+		.active-block {
+			position: absolute;
+			left: 0;
+			top: 0;
+			bottom: 0;
+			width: 0;
+			background: #40C4FF;
+			transition: width .2s ease;
+			&.active {
+				width: 5px;
+			}
+		}
+	}
+}

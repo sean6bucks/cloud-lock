@@ -45,10 +45,6 @@ class Doors extends Component {
 		this.props.action.requestAccess(id);
 	}
 
-	componentWillMount() {
-
-	}
-
 	render() {
 		if ( !this.props.doors ) {
 			return <CircularProgress size={150} thickness={5} />

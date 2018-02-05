@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import List from 'material-ui/List'
+import Divider from 'material-ui/Divider'
 // COMPONENTS
 import { DoorItem } from './DoorItem'
 import { Door } from '../Door'
@@ -25,8 +26,9 @@ export const DoorList = ({ doors, filter, door, show, showDoor, hideDoor, unlock
 	const list_header = filter === 'AUTHORIZED' ? 'Authorized Doors' : 'All Doors';
 
 	return (
-		<List id='door-list'>
+		<List id='door-list' style={{ padding: 0 }}>
 			<h2 className="text-center">{ list_header }</h2>
+			<Divider />
 			{ available_doors }
 			<Door
 				open={ show }

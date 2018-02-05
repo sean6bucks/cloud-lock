@@ -1,6 +1,9 @@
 #door-list {
   width: 100%; }
 
+#door-list h2 {
+  padding: 10px 0; }
+
 #door-list .door-item {
   position: relative;
   height: 80px;
