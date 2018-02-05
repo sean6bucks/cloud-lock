@@ -7,7 +7,7 @@ import Lock from '../../containers/Lock'
 // COMPONENTS
 import { DoorItem } from './DoorItem'
 
-export const DoorList = ({ doors, filter, lock, show, showLock, hideLock, unlockDoor, requestAccess }) => {
+export const DoorList = ({ doors, filter, lock, showLock, hideLock, unlockDoor, requestAccess }) => {
 
 	const available_doors = doors
 		.filter( door => {
@@ -32,11 +32,6 @@ export const DoorList = ({ doors, filter, lock, show, showLock, hideLock, unlock
 			<Divider />
 			{ available_doors }
 			<Lock
-				open={ show }
-				id={ lock.id }
-				name={ lock.name }
-				status={ lock.status }
-				authorized={ lock.authorized }
 				handleUnlock={ unlockDoor }
 				handleRequest={ requestAccess }
 				handleCancel={ hideLock }

@@ -1,21 +1,25 @@
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import * as actions from '../actions'
+import {
+	toggleDoor,
+	showDoor,
+} from '../actions'
 
-import AdminDoors from '../components/AdminDoors'
+import Doors from '../components/Admin/Doors'
 
 const mapStateToProps = ( state, prop ) => {
 	return {
-		doors: state.user.doors,
-		show: state.show_door,
-		door: state.door
+		doors: state.doors,
 	}
 }
 
 const mapDispatchToProps = dispatch => {
 	return {
-		action: bindActionCreators( actions, dispatch )
+		action: bindActionCreators( {
+			toggleDoor,
+			showDoor
+		}, dispatch )
 	}
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(AdminDoors);
+export default connect(mapStateToProps, mapDispatchToProps)(Doors);

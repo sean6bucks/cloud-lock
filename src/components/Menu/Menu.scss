@@ -12,9 +12,11 @@
 			width: 0;
 			background: #40C4FF;
 			transition: width .2s ease;
-			&.active {
-				width: 5px;
-			}
+		}
+	}
+	.active {
+		.active-block {
+			width: 5px;
 		}
 	}
 }

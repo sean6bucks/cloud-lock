@@ -16,14 +16,14 @@ class Lock extends Component {
 
 	render() {
         // TODO: MOVE INTO STATE/PROPS THROUGH CONTAINER
-		const { id, name, authorized, open, status, handleUnlock, handleCancel, handleRequest } = this.props;
+		const { handleUnlock, handleCancel, handleRequest } = this.props;
 
-		const disabled = !status || status === 'unlock_failed' ? false : true;
+		const disabled = !this.props.lock.status || this.props.lock.status === 'unlock_failed' ? false : true;
 
 		return (
 			<Dialog className="lock"
 				modal={true}
-				open={ open }
+				open={ this.props.show }
 				children={
 					<article>
 						<CancelButton
@@ -31,14 +31,14 @@ class Lock extends Component {
 							handleClick={ handleCancel } />
 						<LockButton
 							key='door-unlock'
-							id={ id }
-							authorized={ authorized }
-							status={ status }
+							id={ this.props.lock.id }
+							authorized={ this.props.lock.authorized }
+							status={ this.props.lock.status }
 							handleClick={ handleUnlock } />
-						<h2 key='door-name' className="text-center">{ name }</h2>
+						<h2 key='door-name' className="text-center">{ this.props.lock.name }</h2>
 					</article>
 				}
-				actions={ !authorized ? <RequestButton id={id} status={ status } handleClick={ handleRequest } /> : null }
+				actions={ !this.props.lock.authorized ? <RequestButton id={this.props.lock.id} status={ this.props.lock.status } handleClick={ handleRequest } /> : null }
 				actionsContainerStyle={{ textAlign: 'center' }}
 			/>
 		)

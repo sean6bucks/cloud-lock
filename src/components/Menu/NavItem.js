@@ -1,12 +1,18 @@
 import React from 'react'
 import MenuItem from 'material-ui/MenuItem'
-import { Link } from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 
-export const NavItem = ({ path, label, active }) => {
+export const NavItem = ({ path, label, active, handleClick }) => {
 	return (
-		<MenuItem className="nav-item">
-			<span className={ `active-block ${ active ? 'active' : '' }` }></span>
-			<Link style={{ paddingLeft: 15 }} to={ path }>{ label }</Link>
-		</MenuItem>
+		<NavLink
+			to={ path }
+			activeClassName="active"
+			onClick={ handleClick }
+		>
+			<MenuItem className="nav-item" innerDivStyle={{ paddingLeft: 25 }}>
+				<span className="active-block"></span>
+				{ label }
+			</MenuItem>
+		</NavLink>
 	)
 }

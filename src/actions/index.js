@@ -24,9 +24,12 @@ export const logout = () => {
 }
 
 export const setAuthToken = token => {
-	return {
-		type: TYPES.SET_AUTH_TOKEN,
-		token
+	return (dispatch, getState) => {
+		dispatch({
+			type: TYPES.SET_AUTH_TOKEN,
+			token
+		});
+		dispatch( fetchingComplete('token') );
 	}
 }
 
@@ -36,30 +39,25 @@ export const toggleMenu = () => {
 	}
 }
 
-// USER DATA
+// FETCH DATA
 
 export const getUser = id => {
 	const request = axios.get( endpoint + '/user' )
-
 	return (dispatch, getState) => {
 		request.then(
 			({data}) => {
 				dispatch({
 					type: TYPES.GET_USER_INFO,
 					payload: data
-				})
+				});
+				dispatch( fetchingComplete('user') );
 			}
 		).then( () => {
 			dispatch( getDoors() );
+			dispatch( getEmployees() );
 		})
 	}
 }
-
-export const updateUser = ( id, profile ) => {
-
-}
-
-// DOOR ACTIONS
 
 export const getDoors = () => {
 	const request = axios.get( endpoint + '/doors' )
@@ -71,10 +69,35 @@ export const getDoors = () => {
 					payload: data.doors
 				});
 				dispatch( updateUserDoors( data.doors ) );
+				dispatch( fetchingComplete('doors') );
 			}
 		)
 	}
 }
+
+export const getEmployees = () => {
+	const request = axios.get( endpoint + '/employees' )
+	return (dispatch, getState) => {
+		request.then(
+			({data}) => {
+				dispatch({
+					type: TYPES.GET_EMPLOYEE_LIST,
+					payload: data.employees
+				});
+				dispatch( fetchingComplete('employees') );
+			}
+		)
+	}
+}
+
+const fetchingComplete = key => {
+	return {
+		type: TYPES.FETCHING_COMPLETE,
+		key
+	}
+}
+
+// DOOR / LOCK ACTIONS
 
 export const updateUserDoors = ( doors ) => {
 	return {
@@ -121,11 +144,6 @@ export const unlockDoor = id => {
 		dispatch( changeLockStatus('unlocking') );
 		request.then(
 			({data}) => {
-                // TODO: ADD DELAY SETTING FOR DEMO?
-				// delay( () => {
-				// 	...
-				// }, 2000 )
-
 				dispatch({
 					type: TYPES.UNLOCK_DOOR,
 					payload: { id }
@@ -178,20 +196,88 @@ export const requestAccess = id => {
 
 // ADMIN PANEL DATA
 
-export const addDoor = data => {
-
+export const toggleDoor = show => {
+	return {
+		type: TYPES.TOGGLE_DOOR,
+		show
+	}
 }
 
-export const updateDoor = id => {
-
+export const showDoor = door => {
+	return (dispatch, getState) => {
+		dispatch({
+			type: TYPES.SHOW_DOOR,
+			payload: door
+		});
+		dispatch( setDoorEmployees(door) );
+	}
+}
+const setDoorEmployees = door => {
+	return (dispatch, getState) => {
+		const employees = door.permissions.map( id => {
+			const employee = getState().employees.find( emp => emp.id === id )
+			return Object.assign({}, employee, { selected: true });
+		});
+		dispatch( updateDoorEmployees( employees ) );
+	}
 }
 
+export const updateDoorEmployees = employees => {
+	return {
+		type: TYPES.UPDATE_DOOR_EMPLOYEES,
+		payload: { employees }
+	}
+}
+
+export const changeDoorStatus = status => {
+	return {
+		type: TYPES.CHANGE_DOOR_STATUS,
+		payload: { status }
+	}
+}
+
+export const updateDoor = door => {
+    const request = axios.post( endpoint + '/door', {
+		id: door.id,
+	 	data: door
+	})
+	return (dispatch, getState) => {
+		dispatch( changeDoorStatus('updating') );
+		request.then(
+			({data}) => {
+                const doors = getState().doors.map( d => {
+					return d.id === door.id ? Object.assign( {}, d, door ) : d
+				})
+				dispatch({
+					type: TYPES.UPDATE_DOOR_LIST,
+					payload: doors
+				});
+				dispatch( updateUserDoors(doors) )
+				delay( () => {
+					dispatch( toggleDoor(false) );
+					dispatch( resetDoor() );
+				}, 500)
+			}
+		).catch(
+			({error}) => {
+				console.log(`
+					== ERROR: Could Not Update Door ==
+					${ error }
+					==================================
+				`)
+				dispatch( changeLockStatus('update_failed') );
+			}
+		)
+	}
+}
+
+export const resetDoor = () => {
+	return {
+		type: TYPES.RESET_DOOR
+	}
+}
 
 // EMPLYEE ACTIONS
-
-export const getEmployees = () => {
-
-}
 
 export const addEmployee = data => {
 

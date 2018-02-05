@@ -4,8 +4,6 @@ import TextField from 'material-ui/TextField'
 import RaisedButton from 'material-ui/RaisedButton'
 import { lightBlueA200 } from 'material-ui/styles/colors'
 
-// STYLES
-const underline_style = { color: lightBlueA200 }
 class Login extends Component {
 
 	credentials = {
@@ -27,6 +25,8 @@ class Login extends Component {
 	}
 
 	render() {
+		const underline_style = { color: lightBlueA200 }
+		
 		return (
 			<Dialog
 				modal={true}

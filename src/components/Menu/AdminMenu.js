@@ -3,7 +3,7 @@ import Divider from 'material-ui/Divider'
 
 import { NavItem } from './NavItem'
 
-export const AdminMenu = ({ pathname }) => {
+export const AdminMenu = ({ pathname, toggle }) => {
 
 	const active = path => {
 		return path === pathname;
@@ -18,9 +18,9 @@ export const AdminMenu = ({ pathname }) => {
 	return (
 		<section id="user-menu" className="menu-section">
 			<h2>Admin Settings</h2>
-			<NavItem path={ paths.doors } label={ 'Doors' } active={ active(paths.doors) } />
-			<NavItem path={ paths.employees } label={ 'Employees' } active={ active(paths.employees) } />
-			<NavItem path={ paths.events } label={ 'Event History' } active={ active(paths.events) } />
+			<NavItem path={ paths.doors } label={ 'Doors' } active={ active(paths.doors) } handleClick={ toggle } />
+			<NavItem path={ paths.employees } label={ 'Employees' } active={ active(paths.employees) } handleClick={ toggle } />
+			<NavItem path={ paths.events } label={ 'Event History' } active={ active(paths.events) } handleClick={ toggle } />
 			<Divider />
 		</section>
 	)

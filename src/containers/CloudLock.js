@@ -4,10 +4,11 @@ import { connect } from 'react-redux'
 import * as actions from '../actions'
 import { Route, Redirect } from 'react-router-dom'
 // CONTAINERS
+import Login from './Login'
 import Header from './Header'
 import Menu from './Menu'
 import Doors from './Doors'
-import Login from './Login'
+import AdminDoors from './AdminDoors'
 
 /*
 Main container for Cloud Lock application:
@@ -34,9 +35,10 @@ class CloudLock extends Component {
 				<Header user={ this.props.user } logout={ this.props.action.logout } />
 				<Menu />
 				<Route exact path="/doors" component={ Doors } />
+				<Route exact path="/settings/doors" component={ AdminDoors } />
 				<Route path="/" render={
 					({ match }) => {
-						return <Redirect to={ '/doors' } />
+						return <Redirect to={ '/settings/doors' } />
 					}
 				} />
 			</div>

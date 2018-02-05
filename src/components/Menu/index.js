@@ -16,11 +16,11 @@ class Menu extends Component {
 
 	render() {
 		return (
-			<Drawer open={ this.props.open_menu }>
+			<Drawer docked={false} open={ this.props.open_menu }>
 				<CloseButton handleClick={ this.props.action.toggleMenu } />
-				<UserMenu user={ this.props.user } pathname={ this.props.location.pathname }/>
+				<UserMenu user={ this.props.user } pathname={ this.props.location.pathname } toggle={ this.props.action.toggleMenu }/>
 				{ this.props.user.admin ? (
-					<AdminMenu pathname={ this.props.location.pathname }/>
+					<AdminMenu pathname={ this.props.location.pathname } toggle={ this.props.action.toggleMenu }/>
 				) : null }
 			</Drawer>
 		)

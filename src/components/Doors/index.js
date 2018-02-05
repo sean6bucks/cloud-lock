@@ -27,7 +27,6 @@ class Doors extends Component {
 	}
 
 	showLock = id => {
-		console.log( id );
 		const lock = this.findLock(id);
 		this.props.action.showLock(lock);
 		this.toggleLock(true);
@@ -54,7 +53,7 @@ class Doors extends Component {
 		// const filtered_doors = this.filterDoors()
 		return (
 			<div>
-				<DoorList doors={ this.props.doors } filter={ this.props.filter } show={ this.props.show } lock={ this.props.lock } showLock={ this.showLock } hideLock={ this.hideLock } unlockDoor={ this.unlockDoor } requestAccess={ this.requestDoorAccess } />
+				<DoorList doors={ this.props.doors } filter={ this.props.filter } showLock={ this.showLock } hideLock={ this.hideLock } unlockDoor={ this.unlockDoor } requestAccess={ this.requestDoorAccess } />
 				<DoorFilters filter={ this.props.filter } handleClick={ this.filterDoors } />
 			</div>
 		)

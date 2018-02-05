@@ -1,8 +1,14 @@
 export const TYPES = {
+    // USER AND DATA
 	SET_AUTH_TOKEN: 'SET_AUTH_TOKEN',
 	GET_USER_INFO: 'GET_USER_INFO',
 	GET_DOOR_LIST: 'GET_DOOR_LIST',
+	GET_EMPLOYEE_LIST: 'GET_EMPLOYEE_LIST',
 	UPDATE_USER_DOORS: 'UPDATE_USER_DOORS',
+	FETCHING_COMPLETE: 'FETCHING_COMPLETE',
+    // HEADER AND NAVIGATION
+	TOGGLE_MENU: 'TOGGLE_MENU',
+    // DOORS/LOCKS LIST
 	CHANGE_LIST_FILTER: 'CHANGE_LIST_FILTER',
 	TOGGLE_LOCK: 'TOGGLE_LOCK',
 	SHOW_LOCK: 'SHOW_LOCK',
@@ -11,35 +17,14 @@ export const TYPES = {
 	CHANGE_LOCK_STATUS: 'CHANGE_LOCK_STATUS',
 	UNLOCK_DOOR: 'UNLOCK_DOOR',
 	REQUEST_ACCESS: 'REQUEST_ACCESS',
-	TOGGLE_MENU: 'TOGGLE_MENU'
-}
-
-export const DATA = {
-	employees: [
-		{
-			id: 1,
-			name: 'Bill Clay',
-			avatar: 'https://pbs.twimg.com/profile_images/480096003148632065/R3bKb_j8_400x400.jpeg',
-			admin: false,
-			doors: [ 1 ]
-		},
-		{
-			id: 2,
-			name: 'Al Powell',
-			admin: true,
-			doors: [ 1, 2 ]
-		},
-		{
-			id: 3,
-			name: 'Holly Genero',
-			admin: false,
-			doors: [ 1 ]
-		},
-		{
-			id: 4,
-			name: 'Roy Rogers',
-			admin: false,
-			doors: [ 1, 2 ]
-		}
-	]
+    // ADMIN SETTINGS: DOORS
+	TOGGLE_DOOR: 'TOGGLE_DOOR',
+	SHOW_DOOR: 'SHOW_DOOR',
+	HIDE_DOOR: 'HIDE_DOOR',
+	RESET_DOOR: 'RESET_DOOR',
+	CHANGE_DOOR_STATUS: 'CHANGE_DOOR_STATUS',
+	UPDATE_DOOR_EMPLOYEES: 'UPDATE_DOOR_EMPLOYEES',
+	UPDATE_DOOR_LIST: 'UPDATE_DOOR_LIST',
+    // ADMIN SETTINGS: EMPLOYEES
+	UPDATE_EMPLOYEE_LIST: 'UPDATE_EMPLOYEE_LIST'
 }
