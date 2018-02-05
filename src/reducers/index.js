@@ -60,21 +60,21 @@ const doorListReducer = ( prevState=[], { type, payload }) => {
 	}
 }
 
-const toggleDoor = ( prevState=false, { type, show }) => {
+const toggleLock = ( prevState=false, { type, show }) => {
 	switch(type) {
-		case 'TOGGLE_DOOR':
+		case 'TOGGLE_LOCK':
 			return show
 		default:
 			return prevState
 	}
 }
-const doorReducer = ( prevState={}, { type, payload }) => {
+const lockReducer = ( prevState={}, { type, payload }) => {
 	switch(type) {
-		case 'SHOW_DOOR':
+		case 'SHOW_LOCK':
 			return Object.assign({}, prevState, payload )
-		case 'RESET_DOOR':
+		case 'RESET_LOCK':
 			return {}
-		case 'CHANGE_DOOR_STATUS':
+		case 'CHANGE_LOCK_STATUS':
 			return Object.assign({}, prevState, payload )
 		case 'UNLOCK_DOOR':
 			return Object.assign({}, prevState, { status: 'unlocked' } )
@@ -90,8 +90,8 @@ const rootReducer = combineReducers({
 	open_menu: menuReducer,
 	user: userReducer,
 	doors: doorListReducer,
-	show_door: toggleDoor,
-	door: doorReducer
+	show_lock: toggleLock,
+	lock: lockReducer
 });
 
 export default rootReducer;

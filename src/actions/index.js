@@ -90,35 +90,35 @@ export const changeListFilter = ( filter ) => {
 	}
 }
 
-export const toggleDoor = show => {
+export const toggleLock = show => {
 	return {
-		type: TYPES.TOGGLE_DOOR,
+		type: TYPES.TOGGLE_LOCK,
 		show
 	}
 }
 
-export const showDoor = door => {
+export const showLock = door => {
 	return {
-		type: TYPES.SHOW_DOOR,
+		type: TYPES.SHOW_LOCK,
 		payload: door
 	}
 }
-export const resetDoor = () => {
+export const resetLock = () => {
 	return {
-		type: TYPES.RESET_DOOR
+		type: TYPES.RESET_LOCK
 	}
 }
 
-const changeDoorStatus = status => {
+const changeLockStatus = status => {
 	return {
-		type: TYPES.CHANGE_DOOR_STATUS,
+		type: TYPES.CHANGE_LOCK_STATUS,
 		payload: { status }
 	}
 }
 export const unlockDoor = id => {
     const request = axios.post( endpoint + '/unlock', { id })
 	return (dispatch, getState) => {
-		dispatch( changeDoorStatus('unlocking') );
+		dispatch( changeLockStatus('unlocking') );
 		request.then(
 			({data}) => {
                 // TODO: ADD DELAY SETTING FOR DEMO?
@@ -131,8 +131,8 @@ export const unlockDoor = id => {
 					payload: { id }
 				});
 				delay( () => {
-					dispatch( toggleDoor(false) );
-					dispatch( resetDoor() );
+					dispatch( toggleLock(false) );
+					dispatch( resetLock() );
 				}, 500)
 			}
 		).catch(
@@ -142,7 +142,7 @@ export const unlockDoor = id => {
 					${ error }
 					========================
 				`)
-				dispatch( changeDoorStatus('unlock_failed') );
+				dispatch( changeLockStatus('unlock_failed') );
 			}
 		)
 	}
@@ -151,7 +151,7 @@ export const unlockDoor = id => {
 export const requestAccess = id => {
 	const request = axios.post( endpoint + '/unlock', { id })
 	return (dispatch, getState) => {
-		dispatch( changeDoorStatus('requesting') );
+		dispatch( changeLockStatus('requesting') );
 		request.then(
 			({data}) => {
 				dispatch({
@@ -159,8 +159,8 @@ export const requestAccess = id => {
 					payload: id
 				});
 				delay( ()=> {
-					dispatch( toggleDoor(false) );
-					dispatch( resetDoor() );
+					dispatch( toggleLock(false) );
+					dispatch( resetLock() );
 				}, 500 )
 			}
 		).catch(
@@ -170,7 +170,7 @@ export const requestAccess = id => {
 					${ error }
 					===========================
 				`)
-				dispatch( changeDoorStatus('request_failed') );
+				dispatch( changeLockStatus('request_failed') );
 			}
 		)
 	}

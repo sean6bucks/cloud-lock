@@ -9,7 +9,7 @@ export const RequestButton = ({ id, status, handleClick }) => {
 	return status === 'requesting' ? (
 		<CircularProgress key="requesting-icon" color={ lightBlueA200 } size={32}/>
 	) : status === 'requested' ? (
-		<p class="button-text text-center">Request Sent!</p>
+		<p className="button-text text-center">Request Sent!</p>
 	) : (
 		<RaisedButton key='request-unlock-button'
 			label='Request Access'

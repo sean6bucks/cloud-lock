@@ -13,7 +13,7 @@ class Doors extends Component {
 		doors: PropTypes.array.isRequired
 	}
 
-	findDoor = (id) => {
+	findLock = (id) => {
 		if ( typeof id === 'string' ) id = parseInt(id, 10);
 		return this.props.doors.find( door => id === door.id )
 	}
@@ -22,19 +22,20 @@ class Doors extends Component {
 		this.props.action.changeListFilter( filter )
 	}
 
-	toggleDoor = show => {
-		this.props.action.toggleDoor(show);
+	toggleLock = show => {
+		this.props.action.toggleLock(show);
 	}
 
-	showDoor = id => {
-		const door = this.findDoor(id);
-		this.props.action.showDoor(door);
-		this.toggleDoor(true);
+	showLock = id => {
+		console.log( id );
+		const lock = this.findLock(id);
+		this.props.action.showLock(lock);
+		this.toggleLock(true);
 	}
 
-	hideDoor = () => {
-		this.toggleDoor(false);
-		this.props.action.resetDoor();
+	hideLock = () => {
+		this.toggleLock(false);
+		this.props.action.resetLock();
 	}
 
 	unlockDoor = id => {
@@ -53,7 +54,7 @@ class Doors extends Component {
 		// const filtered_doors = this.filterDoors()
 		return (
 			<div>
-				<DoorList doors={ this.props.doors } filter={ this.props.filter } show={ this.props.show } door={ this.props.door } showDoor={ this.showDoor } hideDoor={ this.hideDoor } unlockDoor={ this.unlockDoor } requestAccess={ this.requestDoorAccess } />
+				<DoorList doors={ this.props.doors } filter={ this.props.filter } show={ this.props.show } lock={ this.props.lock } showLock={ this.showLock } hideLock={ this.hideLock } unlockDoor={ this.unlockDoor } requestAccess={ this.requestDoorAccess } />
 				<DoorFilters filter={ this.props.filter } handleClick={ this.filterDoors } />
 			</div>
 		)

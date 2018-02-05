@@ -2,11 +2,12 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import List from 'material-ui/List'
 import Divider from 'material-ui/Divider'
+// CONTAINERS
+import Lock from '../../containers/Lock'
 // COMPONENTS
 import { DoorItem } from './DoorItem'
-import { Door } from '../Door'
 
-export const DoorList = ({ doors, filter, door, show, showDoor, hideDoor, unlockDoor, requestAccess }) => {
+export const DoorList = ({ doors, filter, lock, show, showLock, hideLock, unlockDoor, requestAccess }) => {
 
 	const available_doors = doors
 		.filter( door => {
@@ -19,7 +20,7 @@ export const DoorList = ({ doors, filter, door, show, showDoor, hideDoor, unlock
 					id={ door.id }
 					name={ door.name }
 					authorized={ door.authorized }
-					handleClick={ showDoor }
+					handleClick={ showLock }
 				/>
 			)
 		});
@@ -30,15 +31,15 @@ export const DoorList = ({ doors, filter, door, show, showDoor, hideDoor, unlock
 			<h2 className="text-center">{ list_header }</h2>
 			<Divider />
 			{ available_doors }
-			<Door
+			<Lock
 				open={ show }
-				id={ door.id }
-				name={ door.name }
-				status={ door.status }
-				authorized={ door.authorized }
+				id={ lock.id }
+				name={ lock.name }
+				status={ lock.status }
+				authorized={ lock.authorized }
 				handleUnlock={ unlockDoor }
 				handleRequest={ requestAccess }
-				handleCancel={ hideDoor }
+				handleCancel={ hideLock }
 			/>
 		</List>
 	)
