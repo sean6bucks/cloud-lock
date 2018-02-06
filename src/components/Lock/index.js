@@ -23,7 +23,7 @@ class Lock extends Component {
 	}
 
 	hideLock = () => {
-		this.toggleLock(false);
+		this.props.action.toggleLock(false);
 		this.props.action.resetLock();
 	}
 

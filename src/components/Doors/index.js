@@ -22,14 +22,10 @@ class Doors extends Component {
 		this.props.action.changeListFilter( filter )
 	}
 
-	toggleLock = show => {
-		this.props.action.toggleLock(show);
-	}
-
 	showLock = id => {
 		const lock = this.findLock(id);
 		this.props.action.showLock(lock);
-		this.toggleLock(true);
+		this.props.action.toggleLock(true);
 	}
 
 	render() {
