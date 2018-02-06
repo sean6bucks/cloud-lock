@@ -9,8 +9,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
   - Login
   - See available doors:
     - unlock ones they have access to
-	- request access to others
-  - View and edit their user profile
+    - request access to others
 - Admin portal interface that allows admin user to:
   - Add/Edit Doors and set permissions
   - Add/Edit Employees and set door access
@@ -19,7 +18,6 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 ## Table of Contents
 - [Development](#developers)
   - [Getting Started](#getting-started)
-  - [Folder Structure](#folder-structure)
 - [User Interface](#user-interface)
   - [Doors List](#doors-list)
   - [Admin Panel](#admin-panel)
@@ -27,9 +25,11 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ## Development
 ### Getting Started:
+There are only a few steps to use and develop this app locally. After cloning or downloading the repo, from the root folder:
 
-### Folder Structure:
-
+1. run `$ yarn install` or `$ npm install` to download and install packages
+2. After packages are installed, run `$ yarn start` or `$ npm start` to start up a local server
+3. Enjoy! thats it, you can now use the app on localhost which will update with any changes while the server runs.
 
 ## User Interface
 ### Doors List:
@@ -42,7 +42,8 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
   - If user does not have lock permission they will have the ability to request access
 
 
-### Admin Panel: ( visible only to Admin Users )
+### Admin Panel:
+( visible only to Admin Users )
 #### Doors: All doors currently in the system
   - Ability to create new Door Lock with name and Permissions
   - Ability to update name or permissions of any available door
