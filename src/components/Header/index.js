@@ -4,8 +4,6 @@ import AppBar from 'material-ui/AppBar'
 import { deepOrange500 } from 'material-ui/styles/colors'
 // COMPONENT
 import { Logout } from './Logout'
-// STYLES
-import './Header.css'
 
 class Header extends Component {
 

@@ -10,7 +10,7 @@ import { DoorFilters } from './DoorFilters'
 class Doors extends Component {
 
 	static propTypes = {
-		doors: PropTypes.array.isRequired
+		doors: PropTypes.array
 	}
 
 	findLock = (id) => {
