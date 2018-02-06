@@ -48,7 +48,7 @@ class Lock extends Component {
 						<h2 key='door-name' className="text-center">{ this.props.lock.name }</h2>
 					</article>
 				}
-				actions={ !this.props.lock.authorized ? <RequestButton id={ this.props.lock.id } status={ this.props.lock.status } handleClick={ this.requestAccess } /> : null }
+				actions={ !this.props.lock.authorized ? <RequestButton id={ this.props.lock.id } status={ this.props.lock.status } handleClick={ this.requestDoorAccess } /> : null }
 				actionsContainerStyle={{ textAlign: 'center' }}
 			/>
 		)

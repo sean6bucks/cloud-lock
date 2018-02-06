@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import CircularProgress from 'material-ui/CircularProgress'
 // CONTINERS
 import Door from '../../../containers/AdminDoor'
 // COMPONENTS
+import { LoadShade } from '../../globalUI'
 import { DoorList } from './DoorList'
 
 const defaultDoor = {
@@ -38,8 +38,10 @@ class Doors extends Component {
 	}
 
 	render() {
-		return this.props.doors ?
-			(
+		return (
+			this.props.fetching.doors ? (
+				<LoadShade />
+			) : (
 				<div>
 					<DoorList
 						doors={ this.props.doors }
@@ -48,9 +50,8 @@ class Doors extends Component {
 					/>
 					<Door />
 				</div>
-			) : (
-				<CircularProgress size={150} thickness={5} />
 			)
+		)
 	}
 
 }

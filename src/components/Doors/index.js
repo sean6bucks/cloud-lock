@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import CircularProgress from 'material-ui/CircularProgress'
 // CONTAINERS
 import Lock from '../../containers/Lock'
 // COMPONENTS
+import { LoadShade } from '../globalUI'
 import { DoorList } from './DoorList'
 import { DoorFilters } from './DoorFilters'
 
@@ -33,21 +33,21 @@ class Doors extends Component {
 	}
 
 	render() {
-		if ( !this.props.doors ) {
-			return <CircularProgress size={150} thickness={5} />
-		}
-
 		return (
-			<div>
-				<DoorList
-					doors={ this.props.doors }
-					filter={ this.props.filter }
-					showLock={ this.showLock } />
-				<DoorFilters
-					filter={ this.props.filter }
-					handleClick={ this.filterDoors } />
-				<Lock />
-			</div>
+			this.props.fetching.doors ? (
+				<LoadShade />
+			) : (
+				<div>
+					<DoorList
+						doors={ this.props.doors }
+						filter={ this.props.filter }
+						showLock={ this.showLock } />
+					<DoorFilters
+						filter={ this.props.filter }
+						handleClick={ this.filterDoors } />
+					<Lock />
+				</div>
+			)
 		)
 	}
 

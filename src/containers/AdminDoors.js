@@ -7,6 +7,7 @@ import Doors from '../components/Admin/Doors'
 const mapStateToProps = ( state, prop ) => {
 	return {
 		doors: state.doors,
+		fetching: state.fetching
 	}
 }
 

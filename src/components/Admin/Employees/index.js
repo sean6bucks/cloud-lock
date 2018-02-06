@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import CircularProgress from 'material-ui/CircularProgress'
 // CONTINERS
 import Employee from '../../../containers/AdminEmployee'
 // COMPONENTS
+import { LoadShade } from '../../globalUI'
 import { EmployeeList } from './EmployeeList'
 
 const defaultUser = {
@@ -39,8 +39,10 @@ class Employees extends Component {
 	}
 
 	render() {
-		return !this.props.fetching.employees ?
-			(
+		return (
+			this.props.fetching.employees ? (
+				<LoadShade />
+			) : (
 				<div>
 					<EmployeeList
 						employees={ this.props.employees }
@@ -48,11 +50,9 @@ class Employees extends Component {
 						newEmployee={ this.newEmployee } />
 					<Employee />
 				</div>
-			) : (
-				<CircularProgress size={150} thickness={5} />
 			)
+		)
 	}
-
 }
 
 export default Employees;

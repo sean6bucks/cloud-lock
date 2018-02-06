@@ -45,7 +45,7 @@ class Employee extends Component {
 	}
 
 	render() {
-		const underline_style = { color: lightBlueA200 }
+		const underline_style = { backgroundColor: lightBlueA200 }
 
 		return (
 			<Dialog

@@ -49,11 +49,9 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 #### Employees: All Employees currently in the system
   - Ability to create new Employees and set Lock permissions
-  - Abilit to update name or lock permissions of any employee
+  - Ability to update name or lock permissions of any employee
 
 
 #### Events History: List of all lock events
   - Shows list of events: "Unlock", "Failed Unlock", or "Access Requested"
   - Each event will display the Employee, Door/Lock, and Time of event
-
-  
