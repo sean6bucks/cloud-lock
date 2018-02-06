@@ -15,11 +15,10 @@ export const getUser = id => {
 					payload: data
 				});
 				dispatch( fetchingComplete('user') );
+				dispatch( getDoors() );
+				dispatch( getEmployees() );
 			}
-		).then( () => {
-			dispatch( getDoors() );
-			dispatch( getEmployees() );
-		})
+		)
 	}
 }
 

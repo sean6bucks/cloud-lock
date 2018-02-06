@@ -60,7 +60,7 @@ class CloudLock extends Component {
 								<Route path="/settings/employees" component={ AdminEmployees } />
 								<Route path="/settings/events" component={ AdminEvents } />
 								<Route path="/doors" component={ Doors } />
-								<Route path="/" render={ () => <Redirect to={ `${ baseUrl }/doors`} /> } />
+								<Route path="/" render={ () => <Redirect to={ '/doors' } /> } />
 							</Switch>
 						)
 					}
