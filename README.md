@@ -36,6 +36,8 @@ There are only a few steps to use and develop this app locally. After cloning or
 2. After packages are installed, run `$ yarn start` or `$ npm start` to start up a local server
 3. Enjoy! thats it, you can now use the app on localhost which will update with any changes while the server runs.
 
+- __NOTE: this demo was developed to mock a mobile app, so it is best viewed in a thin window or with Chromes mobile/responsive setting__
+
 ## Using the Demo
 After running a local server the app can be viewed at `localhost:3000` by default, or can be viewed as a live version at https://sean6bucks.github.io/cloud-lock
 
