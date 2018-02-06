@@ -1,7 +1,7 @@
 import { combineReducers } from 'redux'
 import { sort } from '../utilities/helpers'
 
-// REDUCER FUNCTIONS
+// TOKEN / AUTH
 const tokenReducer = ( prevState=null, { type, token }) => {
 	switch(type) {
 		case 'SET_AUTH_TOKEN':
@@ -31,6 +31,8 @@ const fetchingReducer = ( prevState={
 	}
 }
 
+// USER
+
 const userReducer = ( prevState={
 		id: null,
 		name: '',
@@ -40,51 +42,24 @@ const userReducer = ( prevState={
 	}, { type, payload } ) => {
 	switch(type) {
 		case 'GET_USER_INFO':
+		case 'UPDATE_USER':
+		case 'CHANGE_LIST_FILTER':
 			return Object.assign({}, prevState, payload);
 		case 'UPDATE_USER_DOORS':
 			const doors = payload.doors.map( door => {
 				return Object.assign({}, door, {
-					authorized: prevState.door_access.includes( door.id )
+					authorized: prevState.access.includes( door.id )
 				})
 			})
 			return Object.assign({}, prevState, {
 				doors: sort( doors, 'name' )
 			})
-		case 'CHANGE_LIST_FILTER':
-			return Object.assign({}, prevState, payload);
 		default:
 			return prevState
 	}
 }
 
-const doorsReducer = ( prevState=[], { type, payload }) => {
-	switch(type) {
-		case 'GET_DOOR_LIST':
-		case 'UPDATE_DOOR_LIST':
-			return payload
-		default:
-			return prevState
-	}
-}
-
-const employeesReducer = ( prevState=[], { type, payload }) => {
-	switch(type) {
-		case 'GET_EMPLOYEE_LIST':
-			return payload
-		default:
-			return prevState
-	}
-}
-
-const eventsReducer = ( prevState=[], { type, payload }) => {
-	switch(type) {
-		case 'GET_EVENTS_LIST':
-		case 'UPDATE_EVENTS_LIST':
-			return payload
-		default:
-			return prevState
-	}
-}
+// MENU
 
 const menuReducer = ( prevState=false, { type }) => {
 	switch(type) {
@@ -94,6 +69,8 @@ const menuReducer = ( prevState=false, { type }) => {
 			return prevState
 	}
 }
+
+// LOCK
 
 const toggleLock = ( prevState=false, { type, show }) => {
 	switch(type) {
@@ -106,19 +83,32 @@ const toggleLock = ( prevState=false, { type, show }) => {
 const lockReducer = ( prevState={}, { type, payload }) => {
 	switch(type) {
 		case 'SHOW_LOCK':
+		case 'CHANGE_LOCK_STATUS':
+		case 'UNLOCK_DOOR':
+		case 'REQUEST_ACCESS':
 			return Object.assign({}, prevState, payload )
 		case 'RESET_LOCK':
 			return {}
-		case 'CHANGE_LOCK_STATUS':
-			return Object.assign({}, prevState, payload )
-		case 'UNLOCK_DOOR':
-			return Object.assign({}, prevState, { status: 'unlocked' } )
-		case 'REQUEST_ACCESS':
-			return Object.assign({}, prevState, { status: 'requested' } )
 		default:
 			return prevState
 	}
 }
+
+// DOORS
+
+const doorsReducer = ( prevState=[], { type, payload }) => {
+	switch(type) {
+		case 'GET_DOOR_LIST':
+		case 'UPDATE_DOOR':
+			return payload
+		case 'ADD_DOOR':
+			return [ ...prevState, payload ]
+		default:
+			return prevState
+	}
+}
+
+// DOOR
 
 const toggleDoor = ( prevState=false, { type, show }) => {
 	switch(type) {
@@ -128,14 +118,84 @@ const toggleDoor = ( prevState=false, { type, show }) => {
 			return prevState
 	}
 }
+const getPermissionIds = employees => {
+	return employees
+		.filter( employee => employee.selected )
+		.map( employee => employee.id );
+}
 const doorReducer = ( prevState={}, { type, payload }) => {
 	switch(type) {
 		case 'SHOW_DOOR':
-		case 'UPDATE_DOOR_EMPLOYEES':
+		case 'UPDATE_DOOR_NAME':
 		case 'CHANGE_DOOR_STATUS':
 			return Object.assign({}, prevState, payload )
+		case 'UPDATE_DOOR_EMPLOYEES':
+			return Object.assign({}, prevState, {
+				employees: payload.employees,
+			 	permissions: getPermissionIds( payload.employees )
+			})
 		case 'RESET_DOOR':
 			return {}
+		default:
+			return prevState
+	}
+}
+
+// EMPLOYEES
+
+const employeesReducer = ( prevState=[], { type, payload }) => {
+	switch(type) {
+		case 'GET_EMPLOYEE_LIST':
+		case 'UPDATE_EMPLOYEE':
+			return payload
+		case 'ADD_EMPLOYEE':
+			return [ ...prevState, payload ]
+		default:
+			return prevState
+	}
+}
+
+// EMPLOYEE
+
+const toggleEmployee = ( prevState=false, { type, show }) => {
+	switch(type) {
+		case 'TOGGLE_EMPLOYEE':
+			return show
+		default:
+			return prevState
+	}
+}
+const getAccessIds = doors => {
+	return doors
+		.filter( door => door.selected )
+		.map( door => door.id );
+}
+const employeeReducer = ( prevState={}, { type, payload }) => {
+	switch(type) {
+		case 'SHOW_EMPLOYEE':
+		case 'UPDATE_EMPLOYEE_NAME':
+		case 'CHANGE_EMPLOYEE_STATUS':
+			return Object.assign({}, prevState, payload )
+		case 'UPDATE_EMPLOYEE_DOORS':
+			return Object.assign({}, prevState, {
+				doors: payload.doors,
+			 	access: getAccessIds( payload.doors )
+			})
+		case 'RESET_EMPLOYEE':
+			return {}
+		default:
+			return prevState
+	}
+}
+
+
+// EVENTS & FILTER
+
+const eventsReducer = ( prevState=[], { type, payload }) => {
+	switch(type) {
+		case 'GET_EVENTS_LIST':
+		case 'UPDATE_EVENTS_LIST':
+			return payload
 		default:
 			return prevState
 	}
@@ -155,14 +215,16 @@ const rootReducer = combineReducers({
 	fetching: fetchingReducer,
 	open_menu: menuReducer,
 	user: userReducer,
-	doors: doorsReducer,
 	show_lock: toggleLock,
 	lock: lockReducer,
 	show_door: toggleDoor,
+	doors: doorsReducer,
 	door: doorReducer,
+	show_employee: toggleEmployee,
+	employees: employeesReducer,
+	employee: employeeReducer,
 	events: eventsReducer,
-	event_filter: eventFilterReducer,
-	employees: employeesReducer
+	event_filter: eventFilterReducer
 });
 
 export default rootReducer;

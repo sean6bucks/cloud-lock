@@ -1,6 +1,6 @@
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import { logout, toggleMenu } from '../actions'
+import actions from '../actions'
 
 import Header from '../components/Header'
 
@@ -13,10 +13,7 @@ const mapStateToProps = ( state, prop ) => {
 
 const mapDispatchToProps = dispatch => {
 	return {
-		action: bindActionCreators({
-			logout,
-			toggleMenu
-		}, dispatch )
+		action: bindActionCreators( actions, dispatch )
 	}
 }
 

@@ -5,19 +5,12 @@ import Subheader from 'material-ui/Subheader'
 import { List } from 'material-ui/List'
 import { lightBlueA200 } from 'material-ui/styles/colors'
 
-import { CloseButton } from '../../globalUI'
 import { EmployeeItem } from './EmployeeItem'
-import { SaveButton } from './SaveButton'
-
-const getNewPermissions = (employees=[]) => {
-	return employees.filter( employee => employee.selected ).map( employee => employee.id );
-}
+import { CloseButton, SaveButton } from '../../globalUI'
 
 class Door extends Component {
 
-	new_name = ''
-
-	authorizedEmployees = (employees=[]) => {
+	employeeItems = (employees=[]) => {
 		return employees.map( employee => (
 			<EmployeeItem
 				key={ employee.id }
@@ -30,8 +23,8 @@ class Door extends Component {
 	}
 
 	setNameValue = ({ target }) => {
-		this.new_name = target.value;
-		this.props.action.changeDoorStatus('dirty');
+		this.props.action.changeDoorName( target.value );
+		this.props.action.changeDoorStatus( target.value ? 'dirty' : '' );
 	}
 
 	selectEmployee = employee_id => {
@@ -39,24 +32,16 @@ class Door extends Component {
 			return employee.id === employee_id ? Object.assign({}, employee, { selected: !employee.selected }) : employee
 		})
 		this.props.action.updateDoorEmployees(employees);
-		this.props.action.changeDoorStatus('dirty');
+		this.props.action.changeDoorStatus( this.props.door.name ? 'dirty' : '' );
 	}
 
 	updateDoor = () => {
-		const door = Object.assign( {}, this.props.door, {
-			name: this.new_name,
-		 	permissions: getNewPermissions(this.props.door.employees)
-		});
-		this.props.action.updateDoor(door);
+		this.props.action.updateDoor(this.props.door);
 	}
 
 	hideDoor = () => {
 		this.props.action.toggleDoor(false);
 		this.props.action.resetDoor();
-	}
-
-	componentWillRender() {
-		this.authorized_employees = this.setAuthorizedEmployees();
 	}
 
 	render() {
@@ -81,12 +66,13 @@ class Door extends Component {
 						/>
 						<List>
 							<Subheader>Authorized Employees</Subheader>
-							{ this.authorizedEmployees(this.props.door.employees) }
+							{ this.employeeItems(this.props.door.employees) }
 						</List>
 					</div>
 				}
 				actions={
 					<SaveButton
+						id={ this.props.door.id }
 						status={ this.props.door.status }
 						handleClick={ this.updateDoor }
 					/>

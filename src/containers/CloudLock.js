@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import * as actions from '../actions'
+import actions from '../actions'
 import { Route, Redirect } from 'react-router-dom'
 // CONTAINERS
 import Login from './Login'
@@ -9,6 +9,7 @@ import Header from './Header'
 import Menu from './Menu'
 import Doors from './Doors'
 import AdminDoors from './AdminDoors'
+import AdminEmployees from './AdminEmployees'
 import AdminEvents from './AdminEvents'
 
 /*
@@ -37,6 +38,7 @@ class CloudLock extends Component {
 				<Menu />
 				<Route exact path="/doors" component={ Doors } />
 				<Route exact path="/settings/doors" component={ AdminDoors } />
+				<Route exact path="/settings/employees" component={ AdminEmployees } />
 				<Route exact path="/settings/events" component={ AdminEvents } />
 				<Route path="/" render={
 					({ match }) => {

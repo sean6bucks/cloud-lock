@@ -1,7 +1,7 @@
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
-import { toggleMenu } from '../actions'
+import actions from '../actions'
 
 import Menu from '../components/Menu'
 
@@ -14,9 +14,7 @@ const mapStateToProps = ( state, prop ) => {
 
 const mapDispatchToProps = dispatch => {
 	return {
-		action: bindActionCreators({
-			toggleMenu
-		}, dispatch )
+		action: bindActionCreators( actions, dispatch )
 	}
 }
 

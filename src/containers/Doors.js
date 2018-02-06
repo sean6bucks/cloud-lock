@@ -1,6 +1,6 @@
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import * as actions from '../actions'
+import actions from '../actions'
 
 import Doors from '../components/Doors'
 

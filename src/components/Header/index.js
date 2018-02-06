@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import AppBar from 'material-ui/AppBar'
-import { lightBlueA200 } from 'material-ui/styles/colors'
+import { deepOrange500 } from 'material-ui/styles/colors'
 // COMPONENT
 import { Logout } from './Logout'
 // STYLES
@@ -18,7 +18,7 @@ class Header extends Component {
 			position: 'fixed',
 			top: 0,
 			zIndex: 10,
-			backgroundColor: lightBlueA200
+			backgroundColor: deepOrange500
 		};
 
 		return (

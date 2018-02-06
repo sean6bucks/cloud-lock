@@ -2,12 +2,12 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import actions from '../actions'
 
-import Lock from '../components/Lock'
+import Employees from '../components/Admin/Employees'
 
 const mapStateToProps = ( state, prop ) => {
 	return {
-		show: state.show_lock,
-		lock: state.lock
+		employees: state.employees,
+		fetching: state.fetching
 	}
 }
 
@@ -17,4 +17,4 @@ const mapDispatchToProps = dispatch => {
 	}
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Lock);
+export default connect(mapStateToProps, mapDispatchToProps)(Employees);

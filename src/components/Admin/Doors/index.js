@@ -2,9 +2,14 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import CircularProgress from 'material-ui/CircularProgress'
 // CONTINERS
-import AdminDoor from '../../../containers/AdminDoor'
+import Door from '../../../containers/AdminDoor'
 // COMPONENTS
 import { DoorList } from './DoorList'
+
+const defaultDoor = {
+	name: '',
+	permissions: []
+}
 
 class Doors extends Component {
 
@@ -21,15 +26,15 @@ class Doors extends Component {
 		this.props.action.toggleDoor(show);
 	}
 
+	newDoor = () => {
+		this.props.action.showDoor(defaultDoor);
+		this.toggleDoor(true);
+	}
+
 	showDoor = id => {
 		const door = this.findDoor(id);
 		this.props.action.showDoor(door);
 		this.toggleDoor(true);
-	}
-
-	hideDoor = () => {
-		this.toggleDoor(false);
-		this.props.action.resetDoor();
 	}
 
 	render() {
@@ -38,8 +43,10 @@ class Doors extends Component {
 				<div>
 					<DoorList
 						doors={ this.props.doors }
-						showDoor={ this.showDoor } />
-					<AdminDoor />
+						showDoor={ this.showDoor }
+						newDoor={ this.newDoor }
+					/>
+					<Door />
 				</div>
 			) : (
 				<CircularProgress size={150} thickness={5} />

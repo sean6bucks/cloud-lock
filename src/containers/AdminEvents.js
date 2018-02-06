@@ -1,8 +1,6 @@
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import {
-	updateEventsList
-} from '../actions'
+import actions from '../actions'
 
 import Events from '../components/Admin/Events'
 
@@ -15,9 +13,7 @@ const mapStateToProps = ( state, prop ) => {
 
 const mapDispatchToProps = dispatch => {
 	return {
-		action: bindActionCreators( {
-			updateEventsList
-		}, dispatch )
+		action: bindActionCreators( actions, dispatch )
 	}
 }
 

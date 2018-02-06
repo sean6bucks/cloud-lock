@@ -1,12 +1,6 @@
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import {
-	toggleDoor,
-	resetDoor,
-	updateDoorEmployees,
-	changeDoorStatus,
-	updateDoor
-} from '../actions'
+import actions from '../actions'
 
 import Door from '../components/Admin/Door'
 
@@ -20,13 +14,7 @@ const mapStateToProps = ( state, prop ) => {
 
 const mapDispatchToProps = dispatch => {
 	return {
-		action: bindActionCreators( {
-			toggleDoor,
-			resetDoor,
-			updateDoorEmployees,
-			changeDoorStatus,
-			updateDoor
-		}, dispatch )
+		action: bindActionCreators( actions, dispatch )
 	}
 }
 

@@ -1,6 +1,5 @@
 import { delay } from './helpers'
 
-
 const generate_token = (len) => {
 	var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
 	let token = '';

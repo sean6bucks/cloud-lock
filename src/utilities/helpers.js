@@ -4,14 +4,22 @@ export const sort = (arr, val) => {
 	if ( !val ||  typeof val !== 'string' ) return new_array.sort();
 
 	return new_array.sort( (a,b) => {
-		const valA = a[val].toLowerCase();
-		const valB = b[val].toLowerCase();
+		const valA = typeof a[val] === 'string' ? a[val].toLowerCase() : a[val];
+		const valB = typeof b[val] === 'string' ? b[val].toLowerCase() : b[val];
 		return valA < valB ? -1 : valA > valB ? 1 : 0;
 	})
 }
 
 export const delay = (func, duration) => {
 	setTimeout( func, duration );
+}
+
+export const generateId = (collection=[]) => {
+	let max_id = 1;
+	collection.forEach( obj => {
+		max_id = obj.id > max_id ? obj.id : max_id;
+	})
+	return ( max_id + 1 )
 }
 
 export const newEvent = ({ type, user, door }) => {
