@@ -35,6 +35,11 @@ export const unlockDoor = id => {
 		dispatch( changeLockStatus('unlocking') );
 		request.then(
 			({data}) => {
+                // CREATE FAKE FAIL FOR DEMO PURPOSE
+				if ( getState().lock.fail ) {
+					throw "Error: Could Not Connect";
+					return;
+				}
 				dispatch({
 					type: TYPES.UNLOCK_DOOR,
 					payload: { status: 'unlocked' }
