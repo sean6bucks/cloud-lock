@@ -3,6 +3,7 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import actions from '../actions'
 import { Switch, Route, Redirect, withRouter } from 'react-router-dom'
+import { baseUrl } from '../config/baseUrl'
 // CONTAINERS
 import Login from './Login'
 import Header from './Header'
@@ -59,7 +60,7 @@ class CloudLock extends Component {
 								<Route path="/settings/employees" component={ AdminEmployees } />
 								<Route path="/settings/events" component={ AdminEvents } />
 								<Route path="/doors" component={ Doors } />
-								<Route path="/" render={ () => <Redirect to="/doors" /> } />
+								<Route path="/" render={ () => <Redirect to={ `${ baseUrl }/doors`} /> } />
 							</Switch>
 						)
 					}
