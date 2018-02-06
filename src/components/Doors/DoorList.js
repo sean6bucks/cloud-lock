@@ -6,6 +6,7 @@ import Divider from 'material-ui/Divider'
 import Lock from '../../containers/Lock'
 // COMPONENTS
 import { DoorItem } from './DoorItem'
+import { ListHeader } from '../globalUI'
 
 export const DoorList = ({ doors, filter, lock, showLock, hideLock, unlockDoor, requestAccess }) => {
 
@@ -28,7 +29,7 @@ export const DoorList = ({ doors, filter, lock, showLock, hideLock, unlockDoor, 
 
 	return (
 		<List id='door-list' style={{ padding: 0 }}>
-			<h2 className="text-center">{ list_header }</h2>
+			<ListHeader text={ list_header } />
 			<Divider />
 			{ available_doors }
 			<Lock

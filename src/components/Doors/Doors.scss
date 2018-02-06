@@ -2,9 +2,6 @@
 
 #door-list {
 	@extend %full_width;
-	h2 {
-		padding: 10px 0;
-	}
 	.door-item {
 		position: relative;
 		height: 80px;

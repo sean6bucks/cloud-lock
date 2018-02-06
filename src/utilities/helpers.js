@@ -13,3 +13,16 @@ export const sort = (arr, val) => {
 export const delay = (func, duration) => {
 	setTimeout( func, duration );
 }
+
+export const newEvent = ({ type, user, door }) => {
+	const label = type === 'unlock' ? 'Door Unlocked' :
+				type === 'request' ? 'Access Requested' :
+				type === 'unlock_failed' ? 'Unlock Failed' : 'Event'
+	const time = new Date().getTime()
+	return {
+		label,
+		user,
+		door,
+		timestamp: time
+	}
+}

@@ -20,11 +20,12 @@ const fetchingReducer = ( prevState={
 		token: true,
 		user: true,
 		doors: true,
-		employees: true
-	}, { type, key } ) => {
+		employees: true,
+		events: true
+	}, { type, value } ) => {
 	switch(type) {
 		case 'FETCHING_COMPLETE':
-			return Object.assign({}, prevState, { [key]: true });
+			return Object.assign({}, prevState, { [value]: false });
 		default:
 			return prevState
 	}
@@ -69,6 +70,16 @@ const doorsReducer = ( prevState=[], { type, payload }) => {
 const employeesReducer = ( prevState=[], { type, payload }) => {
 	switch(type) {
 		case 'GET_EMPLOYEE_LIST':
+			return payload
+		default:
+			return prevState
+	}
+}
+
+const eventsReducer = ( prevState=[], { type, payload }) => {
+	switch(type) {
+		case 'GET_EVENTS_LIST':
+		case 'UPDATE_EVENTS_LIST':
 			return payload
 		default:
 			return prevState
@@ -130,6 +141,15 @@ const doorReducer = ( prevState={}, { type, payload }) => {
 	}
 }
 
+const eventFilterReducer = ( prevState=null, { type, id }) => {
+	switch(type) {
+		case 'CHANGE_EVENT_FILTER':
+			return id
+		default:
+			return prevState
+	}
+}
+
 const rootReducer = combineReducers({
 	token: tokenReducer,
 	fetching: fetchingReducer,
@@ -140,6 +160,8 @@ const rootReducer = combineReducers({
 	lock: lockReducer,
 	show_door: toggleDoor,
 	door: doorReducer,
+	events: eventsReducer,
+	event_filter: eventFilterReducer,
 	employees: employeesReducer
 });
 

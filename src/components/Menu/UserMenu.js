@@ -25,7 +25,6 @@ export const UserMenu = ({ user, pathname, toggle }) => {
 				{ user.name }
 			</h2>
 			<NavItem path={ paths.doors } label={ 'Available Doors' } active={ active(paths.doors) } handleClick={ toggle } />
-			<NavItem path={ paths.events } label={ 'User History' } active={ active(paths.events) } handleClick={ toggle } />
 			<Divider />
 		</section>
 	)

@@ -9,6 +9,7 @@ import Header from './Header'
 import Menu from './Menu'
 import Doors from './Doors'
 import AdminDoors from './AdminDoors'
+import AdminEvents from './AdminEvents'
 
 /*
 Main container for Cloud Lock application:
@@ -36,9 +37,10 @@ class CloudLock extends Component {
 				<Menu />
 				<Route exact path="/doors" component={ Doors } />
 				<Route exact path="/settings/doors" component={ AdminDoors } />
+				<Route exact path="/settings/events" component={ AdminEvents } />
 				<Route path="/" render={
 					({ match }) => {
-						return <Redirect to={ '/settings/doors' } />
+						return <Redirect to={ '/doors' } />
 					}
 				} />
 			</div>

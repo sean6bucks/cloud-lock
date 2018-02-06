@@ -5,8 +5,6 @@ import CircularProgress from 'material-ui/CircularProgress'
 import AdminDoor from '../../../containers/AdminDoor'
 // COMPONENTS
 import { DoorList } from './DoorList'
-// STYLES
-// import './Doors.css'
 
 class Doors extends Component {
 

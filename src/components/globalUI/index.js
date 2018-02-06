@@ -16,3 +16,8 @@ export const CloseButton = ({ disabled, handleClick }) => {
 		</FloatingActionButton>
 	)
 }
+
+export const ListHeader = ({ text }) => {
+	const style = { padding: 10, textAlign: 'center' }
+	return <h2 style={ style }>{ text }</h2>
+}
