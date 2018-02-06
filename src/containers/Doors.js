@@ -9,7 +9,8 @@ const mapStateToProps = ( state, prop ) => {
 		doors: state.user.doors,
 		filter: state.user.filter,
 		show: state.show_lock,
-		lock: state.lock
+		lock: state.lock,
+		fetching: state.fetching
 	}
 }
 

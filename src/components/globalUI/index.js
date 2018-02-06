@@ -3,7 +3,35 @@ import FloatingActionButton from 'material-ui/FloatingActionButton'
 import FontIcon from 'material-ui/FontIcon'
 import RaisedButton from 'material-ui/RaisedButton'
 import CircularProgress from 'material-ui/CircularProgress'
-import { grey200, grey700, lightBlueA200 } from 'material-ui/styles/colors'
+import { grey200, grey700, lightBlueA200, deepOrange500 } from 'material-ui/styles/colors'
+
+export const LoadShade = () => {
+	const shade_style = {
+		position: 'absolute',
+		top: 0,
+		left: 0,
+		bottom: 0,
+		width: '100%',
+		backgroundColor: grey200,
+		zIndex: 15
+	}
+	const spinner_style = {
+		position: 'absolute',
+		top: '50%',
+		left: '50%',
+		transform: 'translate( -50%, -50% )'
+	}
+	return(
+		<div style={ shade_style }>
+			<CircularProgress
+				color={ deepOrange500 }
+				size={150}
+				thickness={5}
+				style={ spinner_style }
+			/>
+		</div>
+	)
+}
 
 export const CloseButton = ({ disabled, handleClick }) => {
 	const style = {
@@ -20,7 +48,7 @@ export const CloseButton = ({ disabled, handleClick }) => {
 }
 
 export const ListHeader = ({ text }) => {
-	const style = { padding: 10, textAlign: 'center' }
+	const style = { padding: 15, textAlign: 'center' }
 	return <h2 style={ style }>{ text }</h2>
 }
 

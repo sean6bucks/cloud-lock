@@ -49,7 +49,6 @@ class Employee extends Component {
 
 		return (
 			<Dialog
-				className="admin__employee"
 				modal={true}
 				open={ this.props.show }
 				children={

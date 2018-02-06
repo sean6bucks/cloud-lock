@@ -49,7 +49,6 @@ class Door extends Component {
 
 		return (
 			<Dialog
-				className="admin__door"
 				modal={true}
 				open={ this.props.show }
 				children={

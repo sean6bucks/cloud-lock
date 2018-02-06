@@ -1,18 +1,10 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { List, ListItem } from 'material-ui/List'
+import { List } from 'material-ui/List'
 import Divider from 'material-ui/Divider'
+// COMPONENTS
+import { DoorItem } from './DoorItem'
 import { ListHeader, CreateNew } from '../../globalUI'
-
-const DoorItem = ({ id, name, handleClick }) => {
-	return (
-		<ListItem
-			className="admin__door-list--item"
-			primaryText={ name }
-			onClick={ () => { handleClick(id) } }
-		/>
-	)
-}
 
 export const DoorList = ({ doors, showDoor, newDoor }) => {
 	return (

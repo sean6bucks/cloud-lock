@@ -14,10 +14,20 @@ class Lock extends Component {
 		show: PropTypes.bool
 	}
 
-	render() {
-        // TODO: MOVE INTO STATE/PROPS THROUGH CONTAINER
-		const { handleUnlock, handleCancel, handleRequest } = this.props;
+	unlockDoor = () => {
+		this.props.action.unlockDoor( this.props.lock.id );
+	}
 
+	requestDoorAccess = id => {
+		this.props.action.requestAccess( this.props.lock.id );
+	}
+
+	hideLock = () => {
+		this.toggleLock(false);
+		this.props.action.resetLock();
+	}
+
+	render() {
 		const disabled = !this.props.lock.status || this.props.lock.status === 'unlock_failed' ? false : true;
 
 		return (
@@ -28,17 +38,17 @@ class Lock extends Component {
 					<article>
 						<CancelButton
 							disabled={ disabled }
-							handleClick={ handleCancel } />
+							handleClick={ this.hideLock } />
 						<LockButton
 							key='door-unlock'
 							id={ this.props.lock.id }
 							authorized={ this.props.lock.authorized }
 							status={ this.props.lock.status }
-							handleClick={ handleUnlock } />
+							handleClick={ this.unlockDoor } />
 						<h2 key='door-name' className="text-center">{ this.props.lock.name }</h2>
 					</article>
 				}
-				actions={ !this.props.lock.authorized ? <RequestButton id={this.props.lock.id} status={ this.props.lock.status } handleClick={ handleRequest } /> : null }
+				actions={ !this.props.lock.authorized ? <RequestButton id={ this.props.lock.id } status={ this.props.lock.status } handleClick={ this.requestAccess } /> : null }
 				actionsContainerStyle={{ textAlign: 'center' }}
 			/>
 		)

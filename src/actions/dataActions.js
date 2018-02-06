@@ -13,3 +13,9 @@ export const fetchingComplete = value => {
 		}
 	}
 }
+
+export const resetFetching = () => {
+	return {
+		type: TYPES.RESET_FETCHING
+	}
+}

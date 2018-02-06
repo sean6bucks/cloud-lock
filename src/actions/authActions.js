@@ -1,6 +1,7 @@
 import { TYPES } from '../constants'
 import { mockApi } from '../utilities/mockApi'
-import { fetchingComplete } from './dataActions'
+import { fetchingComplete, resetFetching } from './dataActions'
+import { getUser, resetUser } from './userActions'
 
 // TODO: REPLACE MOCK WITH MOCKABLE/AXIOS
 export const login = data => {
@@ -26,6 +27,12 @@ export const setAuthToken = token => {
 			type: TYPES.SET_AUTH_TOKEN,
 			token
 		});
-		dispatch( fetchingComplete('token') );
+		if ( token ) {
+			dispatch( fetchingComplete('token') );
+			dispatch( getUser() );
+		} else {
+			dispatch( resetUser() );
+			dispatch( resetFetching() );
+		}
 	}
 }

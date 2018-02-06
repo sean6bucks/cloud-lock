@@ -16,16 +16,24 @@ const tokenReducer = ( prevState=null, { type, token }) => {
 	}
 }
 
-const fetchingReducer = ( prevState={
-		token: true,
-		user: true,
-		doors: true,
-		employees: true,
-		events: true
-	}, { type, value } ) => {
+const initialFetching = {
+	token: true,
+	user: true,
+	doors: true,
+	employees: true,
+	events: true
+}
+const fetchingReducer = ( prevState=initialFetching, { type, value } ) => {
 	switch(type) {
 		case 'FETCHING_COMPLETE':
 			return Object.assign({}, prevState, { [value]: false });
+		case 'RESET_FETCHING':
+			return {
+				user: true,
+				doors: true,
+				employees: true,
+				events: true
+			}
 		default:
 			return prevState
 	}
@@ -54,6 +62,8 @@ const userReducer = ( prevState={
 			return Object.assign({}, prevState, {
 				doors: sort( doors, 'name' )
 			})
+		case 'RESET_USER':
+			return {}
 		default:
 			return prevState
 	}

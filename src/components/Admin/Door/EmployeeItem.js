@@ -9,7 +9,11 @@ export const EmployeeItem = ({ employee, handleClick }) => {
 		<ListItem
 			primaryText={ employee.name }
 			rightAvatar={<Avatar src={ employee.avatar } />}
-			leftCheckbox={ <Checkbox checked={ employee.selected } iconStyle={{ color: lightBlueA200 }} onClick={ handleClick } /> }
+			leftCheckbox={
+				<Checkbox
+					checked={ employee.selected }
+					iconStyle={{ color: lightBlueA200 }}
+					onClick={ handleClick } /> }
 		/>
 	)
 }

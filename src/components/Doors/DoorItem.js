@@ -1,21 +1,26 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { ListItem } from 'material-ui/List'
-import Avatar from 'material-ui/Avatar'
 import FontIcon from 'material-ui/FontIcon'
-import { lightGreenA400, red200 } from 'material-ui/styles/colors'
+import { lightGreenA400, grey200 } from 'material-ui/styles/colors'
 
 export const DoorItem = ({ id, name, authorized, handleClick }) => {
-    // TODO: MOVE INTO SINGLE CONST WITH CONDITIONALS
-    // TODO: UPDATE ICON TO BLOCK
-	const authorizedAvatar = <Avatar backgroundColor={ lightGreenA400 } icon={ <FontIcon className="material-icons" color={ '#ffffff' } >vpn_key</FontIcon> } />
-	const unauthorizedAvatar = <Avatar backgroundColor={ red200 } icon={ <FontIcon className="material-icons" color={ '#ffffff' } >block</FontIcon> } />
-
+	const icon = (
+		<FontIcon
+			className="material-icons"
+			color={ authorized ? lightGreenA400 : grey200 } >
+			{ authorized ? 'vpn_key' : 'block' }
+		</FontIcon>
+	)
+	const style = {
+		padding: 10,
+		borderBottom: `1px solid ${ grey200 }`
+	}
 	return (
 		<ListItem
-			className={ `door-list__item ${ authorized ? 'authorized' : 'unauthorized' }` }
 			primaryText={ name }
-			rightAvatar={ authorized ? authorizedAvatar : unauthorizedAvatar }
+			rightIcon={ icon }
+			style={ style }
 			onClick={ () => { handleClick(id) } }
 		/>
 	)

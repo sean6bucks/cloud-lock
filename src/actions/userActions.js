@@ -55,3 +55,9 @@ export const changeListFilter = ( filter ) => {
 		payload: { filter }
 	}
 }
+
+export const resetUser = () => {
+	return {
+		type: TYPES.RESET_USER
+	}
+}
