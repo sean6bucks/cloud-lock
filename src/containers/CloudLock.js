@@ -55,10 +55,10 @@ class CloudLock extends Component {
 							<LoadShade />
 						) : (
 							<Switch>
-								<Route exact path="/doors" component={ Doors } />
-								<Route exact path="/settings/doors" component={ AdminDoors } />
-								<Route exact path="/settings/employees" component={ AdminEmployees } />
-								<Route exact path="/settings/events" component={ AdminEvents } />
+								<Route path="/settings/doors" component={ AdminDoors } />
+								<Route path="/settings/employees" component={ AdminEmployees } />
+								<Route path="/settings/events" component={ AdminEvents } />
+								<Route path="/doors" component={ Doors } />
 								<Route path="/" render={ () => <Redirect to="/doors" /> } />
 							</Switch>
 						)
