@@ -37,8 +37,7 @@ export const unlockDoor = id => {
 			({data}) => {
                 // CREATE FAKE FAIL FOR DEMO PURPOSE
 				if ( getState().lock.fail ) {
-					throw "Error: Could Not Connect";
-					return;
+					throw new Error("Error: Mock Failed Unlock");
 				}
 				dispatch({
 					type: TYPES.UNLOCK_DOOR,

@@ -3,7 +3,6 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import actions from '../actions'
 import { Switch, Route, Redirect, withRouter } from 'react-router-dom'
-import { baseUrl } from '../config/baseUrl'
 // CONTAINERS
 import Login from './Login'
 import Header from './Header'
