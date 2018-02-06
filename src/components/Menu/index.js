@@ -20,6 +20,7 @@ class Menu extends Component {
 			<Drawer docked={false} open={ this.props.open_menu }>
 				<CloseButton handleClick={ this.props.action.toggleMenu } />
 				<ListItem
+					disabled={true}
 					leftAvatar={ <Avatar src={ this.props.user.avatar } /> }
 					primaryText={ <h2>{ this.props.user.name }</h2> }
 					innerDivStyle={{ paddingLeft: 60 }}

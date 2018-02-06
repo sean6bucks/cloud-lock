@@ -8,9 +8,15 @@ export const CloseButton = ({ handleClick }) => {
 		position: 'absolute',
 		right: 10,
 		top: 10,
+		zIndex: 10
 	};
 	return (
-		<FloatingActionButton mini={true} backgroundColor={ deepOrange500 } zDepth={0} style={ style } onClick={ handleClick }>
+		<FloatingActionButton
+			mini={true}
+			backgroundColor={ deepOrange500 }
+			zDepth={1}
+			style={ style }
+			onClick={ handleClick }>
 			<FontIcon className="material-icons">close</FontIcon>
 		</FloatingActionButton>
 	)
