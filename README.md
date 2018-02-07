@@ -53,6 +53,7 @@ After running a local server the app can be viewed at `localhost:3000` by defaul
 #### Lock:
   - Unlock dialog for user to trigger Open
   - If user does not have lock permission they will have the ability to request access
+  - **Note: "Private Office" door will always fail to mock what happens if API call fails**
 
 
 ### Admin Panel:
